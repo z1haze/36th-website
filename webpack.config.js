@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const NodemonPlugin = require('nodemon-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin;
+const CopyPlugin = require('copy-webpack-plugin');
 
 function getPlugins (mode) {
     const plugins = [
@@ -13,6 +14,12 @@ function getPlugins (mode) {
             jQuery: 'jquery'
         }),
         new CleanWebpackPlugin({verbose: true}),
+        new CopyPlugin([{
+            from: __dirname + '/client/src/img',
+            to  : __dirname + '/client/dist/img',
+        }], {
+            copyUnmodified: true
+        }),
         new MiniCssExtractPlugin({
             filename: 'css/[name].css'
         })
