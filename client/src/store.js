@@ -4,9 +4,7 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
-    state: {
-        currentUser: null
-    },
+    state: {},
 
     mutations: {
         SET: (state, {obj, key, val}) => {
@@ -31,31 +29,10 @@ const store = new Vuex.Store({
     },
 
     actions: {
-        init: ({commit}) => new Promise((resolve) => setTimeout(function () {
-            commit('SET', {
-                key: 'currentUser',
-                val: {roles: []}
-            });
-
-            resolve();
-        }, 1000))
+        init: () => null
     },
 
-    getters: {
-        hasPermission: (state) => (permission) => {
-            if (!state.currentUser) {
-                return false;
-            }
-
-            return state.currentUser.roles.some((role) => {
-                /* eslint-disable camelcase */
-                return role.permissions.some(({permission_id}) => {
-                    return permission === permission_id;
-                });
-                /* eslint-enable camelcase */
-            });
-        },
-    }
+    getters: {}
 });
 
 export default store;

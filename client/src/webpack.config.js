@@ -19,20 +19,9 @@ function getPlugins () {
         new CopyPlugin({
             patterns: [
                 {
-                    from: __dirname + '/assets/img',
-                    to  : path.join(__dirname, '..', 'public/img')
-                },
-                {
-                    from: __dirname + '/favicon.ico',
-                    to  : path.join(__dirname, '..', 'public')
-                },
-                {
-                    from: __dirname + '/site.webmanifest',
-                    to  : path.join(__dirname, '..', 'public')
-                },
-                {
-                    from: __dirname + '/browserconfig.xml',
-                    to  : path.join(__dirname, '..', 'public')
+                    context: __dirname + '/static',
+                    from   : '**/*',
+                    to     : path.join(__dirname, '..', 'public')
                 }
             ]
         }, {
@@ -47,8 +36,7 @@ function getPlugins () {
 module.exports = (mode, argv) => {
     const config = {
         entry: {
-            app   : __dirname + '/index.js',
-            styles: __dirname + '/scss/styles.scss'
+            app: __dirname + '/index.js'
         },
         output: {
             filename: 'js/[name].js',
@@ -78,6 +66,9 @@ module.exports = (mode, argv) => {
                     }
                 }
             ]
+        },
+        externals: {
+            jquery: 'jQuery',
         },
         resolve: {
             extensions: ['.js', '.vue'],
