@@ -6,22 +6,22 @@ const hbs = require('express-handlebars');
 // create the express app
 const app = express();
 
-require('./server/locals')(app);
+require('./locals')(app);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // pull in our routes file
-app.use('/', require('./server/routes'));
+app.use('/', require('./routes'));
 
 // set the template engine
 app.engine('hbs', hbs({extname: 'hbs'}));
 app.set('view engine', 'hbs');
 
 // tell express where our views folder is
-app.set('views', path.join(__dirname, 'server/views'));
+app.set('views', path.join(__dirname, 'views'));
 
 // tell express where our public static folder is
-app.use(express.static(path.join(__dirname, 'client/dist')));
+app.use(express.static(path.join(__dirname, '..', 'client/public')));
 
 // start our app
 app.listen(3000, () => {

@@ -1,51 +1,42 @@
 const path = require('path');
 const webpack = require('webpack');
 
-const NodemonPlugin = require('nodemon-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin;
 const CopyPlugin = require('copy-webpack-plugin');
 
-function getPlugins (mode) {
-    const plugins = [
+function getPlugins () {
+    return [
         new webpack.ProgressPlugin(),
-        new webpack.ProvidePlugin({
-            $     : 'jquery',
-            jQuery: 'jquery'
-        }),
+
         new CleanWebpackPlugin({verbose: true}),
+
         new CopyPlugin({
             patterns: [
                 {
-                    from: __dirname + '/client/src/img',
-                    to  : __dirname + '/client/dist/img'
+                    from: __dirname + '/img',
+                    to  : path.join(__dirname, '..', 'public/img')
                 },
             ]
         }),
+
         new MiniCssExtractPlugin({
             filename: 'css/[name].css'
         })
     ];
-
-    if (mode === 'development') {
-        plugins.push(new NodemonPlugin({
-            watch : './**/*',
-            script: __dirname + '/app.js'
-        }));
-    }
-
-    return plugins;
 }
 
 module.exports = (mode, argv) => {
     const config = {
         entry: {
-            app: [__dirname + '/client/src/js/app.js', __dirname + '/client/src/scss/app.scss']
+            app: [__dirname + '/js/app.js', __dirname + '/scss/app.scss']
         },
+
         output: {
             filename: 'js/[name].js',
-            path    : path.resolve(__dirname, 'client/dist')
+            path    : path.resolve(__dirname, '..', 'public')
         },
+
         module: {
             rules: [
                 {
@@ -53,6 +44,7 @@ module.exports = (mode, argv) => {
                     use : [
                         MiniCssExtractPlugin.loader,
                         { loader: 'css-loader', options: { url: false, sourceMap: argv.mode === 'development' } },
+                        { loader: 'postcss-loader', options: { sourceMap: argv.mode === 'development' } },
                         { loader: 'sass-loader', options: { sourceMap: argv.mode === 'development' } }
                     ]
                 },
@@ -65,7 +57,15 @@ module.exports = (mode, argv) => {
                 }
             ]
         },
-        plugins: getPlugins(argv.mode)
+
+        plugins: getPlugins(argv.mode),
+
+        resolve: {
+            extensions: ['.js'],
+            alias     : {
+                '@': './'
+            }
+        },
     };
 
     if (argv.mode === 'development') {

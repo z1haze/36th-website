@@ -1,19 +1,24 @@
 {
   "root": true,
-  "extends": [
-    "eslint:recommended"
-  ],
+  "extends": "eslint:recommended",
   "parserOptions": {
     "parser": "babel-eslint",
-    "ecmaVersion": 2017,
+    "ecmaVersion": 2020,
+    "sourceType": "module",
     "allowImportExportEverywhere": true
   },
   "env": {
     "es6": true,
+    "browser": true,
+    "jquery": true,
+    "commonjs": true,
     "node": true
   },
   "rules": {
-    "one-var": ["error", "never"],
+    "one-var": [
+      "error",
+      "never"
+    ],
     "prefer-const": "error",
     "no-console": "error",
     "semi": "error",
@@ -38,9 +43,13 @@
     "space-infix-ops": "error",
     "camelcase": "error",
     "new-cap": "error",
-    "indent": ["error", 4, {
-      "SwitchCase": 1
-    }],
+    "indent": [
+      "error",
+      4,
+      {
+        "SwitchCase": 1
+      }
+    ],
     "brace-style": "error",
     "no-multi-spaces": "error",
     "key-spacing": [
@@ -74,27 +83,5 @@
         "next": "block-like"
       }
     ]
-  },
-  "overrides": [
-    {
-      "files": [
-        "client/src/js/**"
-      ],
-      "env": {
-        "es6": true,
-        "browser": true,
-        "jquery": true,
-        "commonjs": true
-      }
-    },
-    {
-      "files": [
-        "server/**"
-      ],
-      "env": {
-        "es6": true,
-        "node": true
-      }
-    }
-  ]
+  }
 }
