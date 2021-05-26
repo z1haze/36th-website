@@ -1,0 +1,22 @@
+.btn-secondary {
+  display: block;
+  background: #23262d;
+  text-transform: uppercase;
+  color: #cfcdcd;
+  font-weight: 700;
+  font-size: 11px;
+  font-family: 'Oxanium', cursive;
+  padding: 2px 23px 2px 7px;
+  border-top: 2px solid #2a2b37;
+  border-bottom: 2px solid #2a2b37;
+  border-left-width: 0;
+  border-right-width: 0;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, .35) 0 3px 7px 0;
+
+  &:hover {
+    background-color: #23262d;
+    color: $primary;
+    border-color: #2a2b37;
+  }
+}

@@ -17,6 +17,14 @@ function getPlugins () {
                     from: __dirname + '/img',
                     to  : path.join(__dirname, '..', 'public/img')
                 },
+                {
+                    from: __dirname + '/webfonts',
+                    to  : path.join(__dirname, '..', 'public/webfonts')
+                },
+                {
+                    from: __dirname + '/node_modules/@fortawesome/fontawesome-free/webfonts',
+                    to  : path.join(__dirname, '..', 'public/webfonts')
+                }
             ]
         }),
 
