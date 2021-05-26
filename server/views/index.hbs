@@ -1,21 +1,9 @@
 {{> header/index }}
 
 <main>
-    <section class="hero pt-17">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="text-center wow animate__animated animate__bounceInUp" data-wow-delay=".2s">
-                        <h2 class="font-special">The Fighting <span>36th</span></h2>
-                        <h6 class="font-special">Milsim Gaming Brotherhood</h6>
-                        <a href="#" class="btn btn-special">Apply Today</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    {{> hero }}
 
-    <section class="bg-section-1 py-12">
+    <section class="bg-1 py-12">
         <div class="container">
             <div class="row justify-content-between mb-8">
                 <div class="col-md-6">
@@ -117,6 +105,31 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-darkest py-8">
+        <div class="container">
+            <div class="swiper-container sponsor-slider">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide text-center">
+                        <a href="#">
+                            <img src="/img/rogue_energy.png" alt="" height="40">
+                        </a>
+                    </div>
+
+                    <div class="swiper-slide text-center">
+                        <a href="#">
+                            <img src="/img/gyao.png" alt="" height="125">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-scrollbar"></div>
             </div>
         </div>
     </section>
