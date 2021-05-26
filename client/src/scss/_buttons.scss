@@ -20,3 +20,53 @@
     border-color: #2a2b37;
   }
 }
+
+.btn-special,
+.btn-special::before,
+.btn-special::after {
+  transition: all .3s ease;
+}
+
+.btn-special {
+  position: relative;
+  border: 0;
+  border-radius: 0;
+  background: $primary;
+  color: $white;
+  padding: 1rem 2rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  text-transform: uppercase;
+  font-weight: 600;
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    border-radius: 0;
+    width: 0;
+    height: 0;
+    top: 0;
+    border-top: 3.5rem solid $primary;
+  }
+
+  &:before {
+    left: -1rem;
+    border-left: 1rem solid transparent;
+  }
+
+  &:after {
+    right: -1rem;
+    border-right: 1rem solid transparent;
+  }
+
+  &:hover {
+    background-color: #2a2a32;
+
+    &:before,
+    &:after {
+      border-top-color: #2a2a32;
+    }
+  }
+}
