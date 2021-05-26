@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const path = require('path');
 const bodyParser = require('body-parser');
 const express = require('express');
@@ -24,6 +26,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, '..', 'client/public')));
 
 // start our app
-app.listen(3000, () => {
-    console.log('App running on port 3000'); // eslint-disable-line no-console
+app.listen(process.env.APP_PORT, () => {
+    console.log(`App running on port ${process.env.APP_PORT}`); // eslint-disable-line no-console
 });
