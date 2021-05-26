@@ -18,6 +18,10 @@ function getPlugins () {
                     to  : path.join(__dirname, '..', 'public/img')
                 },
                 {
+                    from: __dirname + '/svg',
+                    to  : path.join(__dirname, '..', 'public/svg')
+                },
+                {
                     from: __dirname + '/webfonts',
                     to  : path.join(__dirname, '..', 'public/webfonts')
                 },

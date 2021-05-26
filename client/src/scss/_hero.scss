@@ -1,0 +1,40 @@
+.hero {
+  background-image: url('/img/hero_bg.webp');
+  background-size: cover;
+  background-position: 0 -390px;
+  margin-top: -1rem;
+  height: 720px;
+  position: relative;
+  overflow: hidden;
+
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1d1f26;
+    opacity: .86;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  h2 {
+    color: $white;
+    font-size: 7rem;
+
+    span {
+      color: $primary;
+    }
+  }
+
+  h6 {
+    letter-spacing: 10px;
+    font-size: 1.4rem;
+    margin-bottom: 1.8rem;
+  }
+}
