@@ -13,11 +13,11 @@
 @import 'buttons';
 @import 'header';
 @import 'hero';
+@import 'boxes';
+@import 'footer';
 
-.bg-1 {
-  background-image: url('/img/section_bg_1.jpg');
-  background-position: center;
-  background-size: cover;
+body {
+  font-weight: 500;
 }
 
 img + img.burst {
@@ -42,59 +42,6 @@ img + img.burst {
     width: 120px;
     height: 8px;
     margin: 0 auto;
-  }
-}
-
-.box {
-  text-align: center;
-  background: #18191f;
-  box-shadow: 0 3px 24px 0 rgba(55, 17, 2, .52);
-  position: relative;
-
-  &:hover {
-    .box-header {
-      img.box-header-hover {
-        opacity: 1;
-      }
-    }
-  }
-
-  .box-header {
-    background-image: url('/img/box_header.png');
-    background-repeat: no-repeat;
-    min-height: 48px;
-    width: 100%;
-    background-position: center;
-    position: relative;
-    display: inline-block;
-    z-index: 1;
-    margin-top: -7px;
-
-    img.box-header-hover {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      transition: .3s linear;
-      opacity: 0;
-      z-index: -1;
-    }
-
-    h6 {
-      font-size: .9rem;
-      text-transform: uppercase;
-      margin-bottom: 0;
-      color: #dcdcdc;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      transition: .3s linear;
-    }
-  }
-
-  .box-content {
-    padding: 1.75rem 2rem;
   }
 }
 

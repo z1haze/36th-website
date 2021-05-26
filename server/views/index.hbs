@@ -41,7 +41,7 @@
                 <div class="col-4">
                     <div class="box">
                         <div class="box-header">
-                            <h6>Active</h6>
+                            <h6 class="fw-bold">Active</h6>
                             <img src="img/box_header_hover.png" alt="" class="box-header-hover">
                         </div>
 
@@ -63,7 +63,7 @@
                 <div class="col-4">
                     <div class="box">
                         <div class="box-header">
-                            <h6>Family</h6>
+                            <h6 class="fw-bold">Family</h6>
                             <img src="img/box_header_hover.png" alt="" class="box-header-hover">
                         </div>
 
@@ -87,19 +87,21 @@
                 <div class="col-4">
                     <div class="box">
                         <div class="box-header">
-                            <h6>Fun</h6>
+                            <h6 class="fw-bold">Fun</h6>
                             <img src="img/box_header_hover.png" alt="" class="box-header-hover">
                         </div>
 
                         <div class="box-content">
                             <div class="d-flex">
+                                <img src="/svg/event.svg" alt="" height="90" class="me-4">
+
                                 <div class="text-start">
                                     <h4 class="font-special">
-                                        <span class="text-primary">Scheduled</span>
+                                        <span class="text-primary">Team</span>
                                         Events
                                     </h4>
 
-                                    <small class="text-uppercase fw-bold">Regularly scheduled events, providing members with a good time and a chance to win big prizes</small>
+                                    <small class="text-uppercase fw-bold">Regularly scheduled events, great times, and great prizes</small>
                                 </div>
                             </div>
                         </div>
@@ -109,28 +111,47 @@
         </div>
     </section>
 
-    <section class="bg-darkest py-8">
+    <section class="bg-darkest py-7">
         <div class="container">
-            <div class="swiper-container sponsor-slider">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide text-center">
-                        <a href="#">
-                            <img src="/img/rogue_energy.png" alt="" height="40">
-                        </a>
-                    </div>
+            {{> sliders/sponsor }}
+        </div>
+    </section>
 
-                    <div class="swiper-slide text-center">
-                        <a href="#">
-                            <img src="/img/gyao.png" alt="" height="125">
-                        </a>
+    <section class="bg-2 py-10">
+        <div class="container z-1 position-relative">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="position-relative">
+                        <h2 class="font-special mb-3">Get In Touch</h2>
+
+                        <div class="ms-6">
+                            <p><span class="font-special me-2">Email:</span> contact@thefighting36th.com</p>
+                            <p><span class="font-special me-2">Sponsors:</span> sponsorships@thefighting36th.com</p>
+                            <p><span class="font-special me-2">Patreon:</span> <a href="#">https://patreon.com/thefighting36th</a></p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="swiper-pagination"></div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-scrollbar"></div>
+                <div class="col-md-6">
+                    <form action="#" method="post">
+                        <div class="row mb-3">
+                            <div class="col-sm-6">
+                                <input type="text" placeholder="Your Name" class="form-control form-control">
+                            </div>
+
+                            <div class="col-sm-6">
+                                <input type="email" placeholder="Your Email" class="form-control">
+                            </div>
+                        </div>
+
+                        <textarea name="message" id="message" class="form-control mb-4" rows="5" placeholder="Your Message"></textarea>
+
+                        <button class="btn btn-special">submit</button>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
 </main>
+
+{{> footer/index }}
