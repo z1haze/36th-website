@@ -3,6 +3,8 @@
   background: #18191f;
   box-shadow: 0 3px 24px 0 rgba(55, 17, 2, .52);
   position: relative;
+  max-width: 414px; // weird, but that' the size of the image
+  margin: 0 auto;
 
   &:hover {
     .box-header {

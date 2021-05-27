@@ -1,12 +1,12 @@
-.btn-secondary {
+.btn-primary {
   color: $body-color;
-  background: $btn-secondary-bg;
+  background: $btn-primary-bg;
   font-family: $font-family-secondary;
-  border-top: 2px solid $btn-secondary-border-color;
+  border-top: 2px solid $btn-primary-border-color;
   border-right-width: 0;
-  border-bottom: 2px solid $btn-secondary-border-color;
+  border-bottom: 2px solid $btn-primary-border-color;
   border-left-width: 0;
-  box-shadow: $btn-secondary-box-shader;
+  box-shadow: $btn-primary-box-shader;
   text-transform: uppercase;
   font-weight: 700;
   font-size: .75rem;
@@ -19,8 +19,8 @@
   &:active:focus {
     color: darken($primary, 10%);
     background-color: inherit;
-    border-color: $btn-secondary-border-color;
-    box-shadow: $btn-secondary-box-shader;
+    border-color: $btn-primary-border-color;
+    box-shadow: $btn-primary-box-shader;
   }
 
   &:hover {

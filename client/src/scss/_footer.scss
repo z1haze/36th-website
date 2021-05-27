@@ -16,7 +16,9 @@
 
   .footer-links {
     li {
-      text-align: right;
+      @include media-breakpoint-up(lg) {
+        text-align: right;
+      }
 
       a {
         line-height: 1.9rem;

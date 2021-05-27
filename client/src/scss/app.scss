@@ -22,7 +22,19 @@
 
 section.intro {
   .text-rotated {
-    top: 13.5rem;
+    top: 12rem;
     left: .5rem;
+
+    @include media-breakpoint-up(sm) {
+      top: 12.5rem;
+    }
+
+    @include media-breakpoint-up(md) {
+      top: 13rem;
+    }
+
+    @include media-breakpoint-up(xl) {
+      top: 13.5rem;
+    }
   }
 }

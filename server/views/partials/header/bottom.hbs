@@ -1,75 +1,43 @@
-<div>
+<nav class="navbar navbar-expand-xl py-0">
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <nav class="d-flex align-items-center font-secondary text-uppercase fw-bold">
-                    <div class="logo d-block d-lg-none">
-                        <a href="#"><img src="img/logo.png" alt="Logo"></a>
-                    </div>
+        <a href="#" class="d-xl-none pt-2 pb-0">
+            <img src="/img/logo.png" alt="" height="60">
+        </a>
 
-                    <div class="navbar-wrap d-none d-lg-flex flex-grow-1">
-                        <ul class="list-unstyled mb-0 d-flex ml-0 me-auto">
-                            <li><a class="text-decoration-none" href="#">Home</a></li>
-                            <li><a class="text-decoration-none" href="#">News</a></li>
-                            <li><a class="text-decoration-none" href="#">Streams</a></li>
-                            <li><a class="text-decoration-none" href="#">Sponsorships</a></li>
-                        </ul>
+        <button id="hamburger" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
 
-                        <div class="logo">
-                            <a href="#"><img src="img/logo.png" alt="Logo" width="165"></a>
-                        </div>
+        <div class="collapse navbar-collapse" id="main-nav">
+            <nav class="d-xl-flex flex-grow-1 align-items-center font-secondary">
+                <ul class="list-unstyled mb-0 d-xl-flex ml-0 me-auto">
+                    <li><a class="text-decoration-none" href="#">Home</a></li>
+                    <li><a class="text-decoration-none" href="#">News</a></li>
+                    <li><a class="text-decoration-none" href="#">Streams</a></li>
+                    <li><a class="text-decoration-none" href="#">Sponsorships</a></li>
+                </ul>
 
-                        <ul class="list-unstyled mb-0 d-flex ms-auto">
-                            <li>
-                                <a class="text-decoration-none" href="#">Divisions</a>
-                                <ul class="list-unstyled mb-0">
-                                    <li><a class="text-decoration-none" href="#">Battlefield</a></li>
-                                    <li><a class="text-decoration-none" href="#">DayZ</a></li>
-                                    <li><a class="text-decoration-none" href="#">Squad</a></li>
-                                </ul>
-                            </li>
-                            <li><a class="text-decoration-none" href="#">Application</a></li>
-                            <li><a class="text-decoration-none" href="#">Store</a></li>
-                            <li><a class="text-decoration-none" href="#">contact</a></li>
-                        </ul>
-                    </div>
-                </nav>
-
-                <div class="mobile-menu-wrap d-block d-lg-none">
-                    <nav>
-                        <div id="mobile-menu" class="navbar-wrap" style="display: block;">
-                            <ul>
-                                <li><a href="#">Home</a>
-                                    <ul class="submenu">
-                                        <li><a href="index-2.html">Home One</a></li>
-                                        <li><a href="index-3.html">Home Two</a></li>
-                                        <li><a href="index-4.html">Home Three</a></li>
-                                        <li><a href="index.html">Home Four</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="about-us.html">About</a></li>
-                                <li><a href="game-overview.html">Overview</a></li>
-                                <li><a href="community.html">Community</a></li>
-                                <li><a href="#">Pages</a>
-                                    <ul class="submenu">
-                                        <li><a href="upcoming-games.html">Upcoming Games</a></li>
-                                        <li><a href="game-single.html">Game Single</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="shop.html">Store</a></li>
-                                <li><a href="#">Blog</a>
-                                    <ul class="submenu">
-                                        <li><a href="blog.html">News Page</a></li>
-                                        <li><a href="blog-details.html">News Details</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="contact.html">contact</a></li>
-                            </ul>
-                        </div>
-                    </nav>
+                <div class="logo d-none d-xl-block">
+                    <a href="#"><img src="img/logo.png" alt="Logo" width="165"></a>
                 </div>
-                <div class="mobile-menu"></div>
-            </div>
+
+                <ul class="list-unstyled mb-0 d-xl-flex ms-auto">
+                    <li>
+                        <a class="text-decoration-none" href="#">Divisions</a>
+                        <ul class="list-unstyled mb-0 d-none d-xl-block submenu">
+                            <li><a class="text-decoration-none" href="#">Battlefield</a></li>
+                            <li><a class="text-decoration-none" href="#">DayZ</a></li>
+                            <li><a class="text-decoration-none" href="#">Squad</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="text-decoration-none" href="#">Application</a></li>
+                    <li><a class="text-decoration-none" href="#">Store</a></li>
+                    <li><a class="text-decoration-none" href="#">contact</a></li>
+                </ul>
+            </nav>
         </div>
     </div>
-</div>
+</nav>
