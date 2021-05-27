@@ -7,49 +7,22 @@
 @import '~animate.css/animate.css';
 @import '~swiper/swiper';
 
+@import 'global';
 @import 'helpers';
 @import 'typography';
 @import 'fonts';
 @import 'buttons';
+@import 'images';
+@import 'sliders';
+@import 'backgrounds';
 @import 'header';
 @import 'hero';
 @import 'boxes';
 @import 'footer';
 
-body {
-  font-weight: 500;
-}
-
-img + img.burst {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  display: block;
-  z-index: -1;
-}
-
-.with-horizontal-divider {
-  position: relative;
-
-  &:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url('/img/horizontal_divider_1.png');
-    width: 120px;
-    height: 8px;
-    margin: 0 auto;
-  }
-}
-
-.sponsor-slider {
-  .swiper-slide {
-    height: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+section.intro {
+  .text-rotated {
+    top: 13.5rem;
+    left: .5rem;
   }
 }

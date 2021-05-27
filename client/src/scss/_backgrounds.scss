@@ -1,0 +1,28 @@
+.bg-1 {
+  background-image: url('/img/section_bg_1.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+.bg-2 {
+  position: relative;
+  background-image: url('/img/squad_bg.jpg');
+  background-position: center 1115px;
+
+  &:after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: $darkest;
+    opacity: .98;
+  }
+}
+
+.bg-3 {
+  background-image: url('/img/footer_bg.jpg');
+  background-position: center;
+  background-size: cover;
+}

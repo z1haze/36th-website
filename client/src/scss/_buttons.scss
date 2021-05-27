@@ -1,23 +1,30 @@
 .btn-secondary {
-  display: block;
-  background: #23262d;
-  text-transform: uppercase;
-  color: #cfcdcd;
-  font-weight: 700;
-  font-size: 11px;
-  font-family: 'Oxanium', cursive;
-  padding: 2px 23px 2px 7px;
-  border-top: 2px solid #2a2b37;
-  border-bottom: 2px solid #2a2b37;
-  border-left-width: 0;
+  color: $body-color;
+  background: $btn-secondary-bg;
+  font-family: $font-family-secondary;
+  border-top: 2px solid $btn-secondary-border-color;
   border-right-width: 0;
+  border-bottom: 2px solid $btn-secondary-border-color;
+  border-left-width: 0;
+  box-shadow: $btn-secondary-box-shader;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: .75rem;
+  padding: .5rem 1rem .4rem;
   border-radius: 3px;
-  box-shadow: rgba(0, 0, 0, .35) 0 3px 7px 0;
+
+  &:hover,
+  &:active,
+  &:focus,
+  &:active:focus {
+    color: darken($primary, 10%);
+    background-color: inherit;
+    border-color: $btn-secondary-border-color;
+    box-shadow: $btn-secondary-box-shader;
+  }
 
   &:hover {
-    background-color: #23262d;
     color: $primary;
-    border-color: #2a2b37;
   }
 }
 
@@ -28,11 +35,11 @@
 }
 
 .btn-special {
+  color: $body-color;
+  background: $primary;
   position: relative;
   border: 0;
   border-radius: 0;
-  background: $primary;
-  color: $white;
   padding: 1rem 2rem;
   margin-left: 1rem;
   margin-right: 1rem;

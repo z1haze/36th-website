@@ -1,7 +1,26 @@
+p {
+  line-height: 1.75rem;
+}
+
 small {
   font-size: .75rem;
 }
 
-p {
-  line-height: 1.75rem;
+/**
+ * Adds a custom horizontal divider beneath any element
+ */
+.with-horizontal-divider {
+  position: relative;
+
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/img/horizontal_divider_1.png');
+    width: 120px;
+    height: 8px;
+    margin: 0 auto;
+  }
 }

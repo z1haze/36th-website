@@ -1,40 +1,13 @@
 .text-rotated {
   position: absolute;
   transform: rotate(-90deg);
-  left: -3rem;
-  top: 8rem;
+  transform-origin: top left;
+  left: 0;
+  top: 50%;
 }
 
 .z-1 {
   z-index: 1 !important;
-}
-
-.bg-1 {
-  background-image: url('/img/section_bg_1.jpg');
-  background-position: center;
-  background-size: cover;
-}
-
-.bg-2 {
-  position: relative;
-  background-image: url('/img/squad_bg.jpg');
-  background-position: center 1225px;
-
-  &:after {
-    content: '';
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    background-color: $darkest;
-    opacity: .98;
-  }
-}
-
-.bg-3 {
-  background-image: url('/img/footer_bg.jpg');
-  background-size: cover;
 }
 
 .desaturate {
