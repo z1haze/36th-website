@@ -14,7 +14,11 @@
   &:before {
     background-image: url('/img/header_bg.jpg');
     width: 100%;
-    height: 135px;
+    height: 145px;
+
+    @include media-breakpoint-up(xl) {
+      height: 140px;
+    }
   }
 
   &:after {
@@ -48,51 +52,13 @@
       ul {
         li {
           &:first-child {
-            font-size: .75rem;
             letter-spacing: .09rem;
           }
         }
 
         a {
-          background-image: url('../img/header_social_bg.jpg');
-          display: block;
-          width: 38px;
-          height: 32px;
-          line-height: 32px;
-          text-align: center;
-          border-radius: 4px;
-          box-shadow: rgba(0, 0, 0, .35) 0 3px 7px 0;
-          color: $primary;
-          font-size: .75rem;
-        }
-      }
-    }
-
-    .header-top-right {
-      ul {
-        li {
-          display: inline-block;
-
-          &.or {
-            font-size: .75rem;
-          }
-        }
-
-        i {
-          width: 29px;
-          height: 25px;
-          box-shadow: 0 3px 7px 0 rgba(12, 18, 40, .20), inset 0 3px 7px 0 rgba(56, 17, 33, .40);
-          text-align: center;
-          line-height: 25px;
-          background: #1d1e29;
-          margin-right: 15px;
           color: $primary;
         }
-      }
-
-      .btn-primary {
-        font-size: .75rem;
-        padding: 2px 23px 2px 7px;
       }
     }
   }
