@@ -14,23 +14,22 @@
   &:before {
     background-image: url('/img/header_bg.jpg');
     width: 100%;
-    height: 145px;
+    height: 162px;
 
     @include media-breakpoint-up(xl) {
       height: 140px;
     }
   }
 
-  &:after {
-    background-image: url('/img/header_bottom_bg.png');
-    width: 1499px;
-    height: 28px;
-    bottom: -11px;
-    margin: 0 auto;
-
-    @include media-breakpoint-down(xxl) {
-      max-width: 100%;
+  @include media-breakpoint-up(xl) {
+    &:after {
+      background-image: url('/img/header_bottom_bg.png');
       background-position: top center;
+      width: 1499px;
+      max-width: 100%;
+      height: 28px;
+      bottom: -11px;
+      margin: 0 auto;
     }
   }
 
