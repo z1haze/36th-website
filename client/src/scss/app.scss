@@ -19,6 +19,7 @@
 @import 'header';
 @import 'hero';
 @import 'boxes';
+@import 'breadcrumbs';
 @import 'footer';
 
 section.intro {
@@ -37,5 +38,15 @@ section.intro {
     @include media-breakpoint-up(xl) {
       top: 13.5rem;
     }
+  }
+}
+
+section.page-info {
+  background-position: center -250px;
+
+  .page-title {
+    font-size: 4rem;
+    font-family: $font-family-tertiary;
+    text-align: center;
   }
 }

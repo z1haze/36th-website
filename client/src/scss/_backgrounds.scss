@@ -26,3 +26,21 @@
   background-position: center;
   background-size: cover;
 }
+
+.bg-4 {
+  position: relative;
+  background-image: url('/img/bf_1.jpg');
+  background-position: center;
+  background-size: cover;
+
+  &:after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: $darkest;
+    opacity: .98;
+  }
+}
