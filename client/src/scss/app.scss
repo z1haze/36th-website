@@ -42,11 +42,27 @@ section.intro {
 }
 
 section.page-info {
-  background-position: center -250px;
+  background-position: center;
+
+  @include media-breakpoint-up(lg) {
+    background-position: center -250px;
+  }
 
   .page-title {
-    font-size: 4rem;
     font-family: $font-family-tertiary;
     text-align: center;
+    font-size: 2rem;
+
+    @include media-breakpoint-up(sm) {
+      font-size: 2.5rem;
+    }
+
+    @include media-breakpoint-up(md) {
+      font-size: 3rem;
+    }
+
+    @include media-breakpoint-up(lg) {
+      font-size: 4rem;
+    }
   }
 }
