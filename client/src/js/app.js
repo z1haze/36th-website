@@ -2,9 +2,11 @@ const bs = require('bootstrap');
 const {WOW} = require('wowjs');
 const Swiper = require('swiper/bundle').default;
 
+// popovers
 [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
     .map((el) => new bs.Popover(el));
 
+// wow js stuff w/animate.css
 const wow = new WOW({
     boxClass    : 'wow',
     animateClass: 'animated',
@@ -15,6 +17,7 @@ const wow = new WOW({
 
 wow.init();
 
+// initialize sliders
 new Swiper('.swiper-container', {
     loop         : true,
     slidesPerView: 5,
@@ -41,9 +44,20 @@ new Swiper('.swiper-container', {
     }
 });
 
+// mobile hamburger class toggle
 document.getElementById('hamburger').addEventListener('click', (e) => {
     e.currentTarget.classList.toggle('open');
     document.querySelector('#site-header').classList.toggle('open');
+});
+
+// preloader
+window.addEventListener('load', () => {
+    const preloader = document.querySelector('.preloader');
+    preloader.classList.add('hide');
+
+    setTimeout(() => {
+        preloader.classList.add('d-none');
+    }, 750); // matches opacity transition
 });
 
 console.log('Loaded! 😀'); // eslint-disable-line no-console
