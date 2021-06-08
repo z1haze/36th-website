@@ -34,6 +34,9 @@
   transition: all .3s ease;
 }
 
+/**
+ * Trapezoidal button
+ */
 .btn-special {
   color: $body-color;
   background: $primary;
@@ -68,11 +71,45 @@
   }
 
   &:hover {
-    background-color: #2a2a32;
+    background-color: $blue-gray;
 
     &:before,
     &:after {
-      border-top-color: #2a2a32;
+      border-top-color: $blue-gray;
+    }
+  }
+}
+
+/**
+ * Parallelogram button
+ */
+.btn-parallelogram {
+  font-weight: 800;
+  font-family: $font-family-secondary;
+  text-transform: uppercase;
+  font-size: .8rem;
+  padding: .85rem 1.25rem;
+  position: relative;
+  z-index: 1;
+  line-height: 1;
+  margin-left: 7px;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    transform: skewX(-20deg);
+    z-index: -1;
+    background-color: $primary;
+    transition: all 0.3s ease;
+  }
+
+  &:hover {
+    &:before {
+      background-color: $blue-gray;
     }
   }
 }

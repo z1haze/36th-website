@@ -1,5 +1,9 @@
+// layout
+$enable-negative-margins: true;
+
 // colors
 $primary: #cd1c1c;
+$blue-gray: #2a2a32;
 $secondary: #1c1f26;
 $darkest: #131418;
 $body-color: #d4d4d4;
@@ -25,11 +29,14 @@ $input-bg: #292a2e;
 $input-padding-y: 1.3rem;
 $input-padding-x: 1.6rem;
 
+// cards
+
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
 
 $theme-colors: map-merge((
-        "darkest":    $darkest
+        "darkest":    $darkest,
+        "blue-gray": $blue-gray
 ), $theme-colors);
 
 $spacers: map-merge((
@@ -46,3 +53,13 @@ $spacers: map-merge((
         16: $spacer * 14,
         17: $spacer * 15
 ), $spacers);
+
+$negative-spacers: if($enable-negative-margins, negativify-map($spacers), null);
+
+// cards
+$card-cap-padding-x: 2.5rem;
+$card-spacer-x: 2.5rem;
+$card-border-width: 0;
+$card-border-radius: 0;
+$card-bg: darken($blue-gray, 4%);
+$card-cap-bg: darken($blue-gray, 4%);

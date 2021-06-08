@@ -7,5 +7,16 @@
     </div>
 </section>
 
-<main>
+<main class="mt-xl-n6 news-page">
+    <div class="container">
+        <div class="row justify-content-xl-between">
+            <section class="col-xl pe-xl-5 flex-xl-grow-1 news-articles">
+                {{> news/article }}
+                {{> news/article }}
+                {{> news/article }}
+            </section>
+
+            {{> news/sidebar }}
+        </div>
+    </div>
 </main>
