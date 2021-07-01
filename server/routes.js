@@ -9,6 +9,10 @@ routes.get('/news', (req, res) => {
     res.render('news');
 });
 
+routes.get('/news/:articleSlug', (req, res) => {
+    res.render('news/article');
+})
+
 routes.get('/streams', (req, res) => {
     res.render('streams');
 });

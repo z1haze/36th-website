@@ -13,3 +13,12 @@
 .desaturate {
   filter: grayscale(100%);
 }
+
+.link-muted {
+  color: $text-muted;
+  transition: color .5s ease;
+
+  &:hover {
+    color: $primary;
+  }
+}

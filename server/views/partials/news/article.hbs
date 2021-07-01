@@ -9,10 +9,10 @@
     </div>
 
     <div class="card-body">
-        <h5 class="card-title"><a href="#">Welcome play for everyone zombie</a></h5>
+        <h5 class="card-title"><a href="/news/welcome-play-for-everyone-zombie">Welcome play for everyone zombie</a></h5>
 
         <div class="author-info">
-            By <a class="text-muted" href="#">Wiggls</a> June 8, 2021
+            By <a class="link-muted" href="#">Wiggls</a> June 8, 2021
         </div>
 
         <p class="card-text my-4">
@@ -23,7 +23,11 @@
     </div>
 
     <div class="card-footer py-4 d-flex justify-content-between">
-        <a href="#" class="read-more">Read More</a>
+        {{#if true}}
+            <a href="/news/some-slug" class="read-more">Read More</a>
+        {{else}}
+            {{> news/article_tags }}
+        {{/if}}
 
         <div class="news-share">
             Share:
