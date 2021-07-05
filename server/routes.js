@@ -11,7 +11,7 @@ routes.get('/news', (req, res) => {
 
 routes.get('/news/:articleSlug', (req, res) => {
     res.render('news/article');
-})
+});
 
 routes.get('/streams', (req, res) => {
     res.render('streams');
