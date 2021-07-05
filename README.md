@@ -1,6 +1,14 @@
 ![Logo](docs/img/logo.png "Logo")
 
-Express-Boilerplate
+The Fighting 36th Website
 ---
 
-> The purpose of the repository is to speed up the process of spinning up a new express website project
+> This repository contains the source code for the 36th website.
+
+This website will handle the following tasks:
+
+#### Front End
+
+* Provide news/blog posts for community members and alike to read
+* Provide a web interface for applicants to submit applications to the unit
+* Display and provide sponsorship information for current and future sponsorship opportunities
