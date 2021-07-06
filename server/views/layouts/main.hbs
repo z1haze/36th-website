@@ -1,10 +1,18 @@
 <!DOCTYPE html>
+
 <html>
+
 {{> head }}
+
 <body>
-{{> preloader }}
-{{{body}}}
-{{> footer/index }}
-{{> scripts }}
+    {{> preloader }}
+
+    <div id="site-wrapper">
+        {{{body}}}
+        {{> footer/index }}
+    </div>
+
+    {{> scripts }}
 </body>
+
 </html>
