@@ -83,6 +83,7 @@ $line-color: $blue-gray;
 
       @include media-breakpoint-up(md) {
         width: 40%;
+        left: 4.5%;
       }
 
       &:before {
