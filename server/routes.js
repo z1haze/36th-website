@@ -5,6 +5,10 @@ routes.get('/', (req, res) => {
     res.render('index');
 });
 
+routes.get('/history', (req, res) => {
+    res.render('history');
+});
+
 routes.get('/news', (req, res) => {
     res.render('news');
 });
@@ -13,28 +17,20 @@ routes.get('/news/:articleSlug', (req, res) => {
     res.render('news/article');
 });
 
-routes.get('/streams', (req, res) => {
-    res.render('streams');
+routes.get('/sponsors', (req, res) => {
+    res.render('sponsors');
 });
 
-routes.get('/sponsorships', (req, res) => {
-    res.render('sponsorships');
+routes.get('/streamers', (req, res) => {
+    res.render('streamers');
 });
 
-routes.get('/division', (req, res) => {
-    res.render('division');
+routes.get('/apply', (req, res) => {
+    res.render('apply');
 });
 
-routes.get('/divisions', (req, res) => {
-    res.render('divisions');
-});
-
-routes.get('/application', (req, res) => {
-    res.render('application');
-});
-
-routes.get('/store', (req, res) => {
-    res.render('store');
+routes.get('/shop', (req, res) => {
+    res.render('shop');
 });
 
 routes.get('/contact', (req, res) => {
