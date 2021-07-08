@@ -93,6 +93,11 @@ $line-color: $blue-gray;
         height: 0;
         position: absolute;
       }
+
+      h4 {
+        font-family: $font-family-secondary;
+        font-weight: 700;
+      }
     }
 
     &:nth-child(odd) {
