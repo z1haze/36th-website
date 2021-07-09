@@ -49,6 +49,7 @@ section.intro {
 
 section.page-info {
   background-position: center;
+  box-shadow: inset 0px -16px 28px 15px $darkest;
 
   @include media-breakpoint-up(lg) {
     background-position: center -250px;
