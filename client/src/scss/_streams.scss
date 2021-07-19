@@ -1,0 +1,38 @@
+.stream {
+  .live-indicator {
+    position: absolute;
+    left: .4rem;
+    top: .4rem;
+    letter-spacing: .065rem;
+  }
+
+  .card-body {
+    padding: .75rem 0 0;
+  }
+
+  .avatar {
+    max-width: 45px;
+  }
+
+  .stream-title {
+    font-size: 1rem;
+
+    a {
+      color: inherit;
+      transition: color .3s ease;
+
+      &:hover {
+        color: $primary;
+      }
+    }
+  }
+
+  .stream-author,
+  .stream-game {
+    font-size: .8rem;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
