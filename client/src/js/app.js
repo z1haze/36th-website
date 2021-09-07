@@ -60,4 +60,7 @@ window.addEventListener('load', () => {
     }, 750); // matches opacity transition
 });
 
+// init form handling
+require('./util/forms').init();
+
 console.log('Loaded! 😀'); // eslint-disable-line no-console
