@@ -1,3 +1,5 @@
+require('regenerator-runtime/runtime');
+
 const bs = require('bootstrap');
 const {WOW} = require('wowjs');
 const Swiper = require('swiper/bundle').default;

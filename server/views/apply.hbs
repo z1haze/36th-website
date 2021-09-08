@@ -11,45 +11,54 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 col-xl-6">
-                <form action="#" method="post" class="mb-6">
+                <form action="#" method="post" class="mb-6" id="application-form">
+                    <div class="alert alert-success d-flex align-items-center d-none mb-xl-5" role="alert">
+                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                        <div>
+                            Thank you for your application! A Recruiter will be with you ASAP!
+                        </div>
+                    </div>
+
                     <!-- Question 1 -->
                     <div class="mb-4">
                         <label class="form-label">What is your Xbox Live Gamertag?</label>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" required>
                     </div>
 
                     <!-- Question 2 -->
                     <div class="mb-4">
                         <label class="form-label">How did you hear about our unit?</label>
-                        <textarea class="form-control" rows="3"></textarea>
+                        <textarea class="form-control" rows="3" required></textarea>
                     </div>
 
                     <!-- Question 3 -->
                     <div class="mb-4">
                         <label class="form-label">Have you ever participated in a MilSim before? <strong>If yes, please explain the circumstance for your leaving.</strong></label>
-                        <select class="form-select mb-3">
+                        <select class="form-select mb-3 milsim" required>
                             <option value="">Choose...</option>
                             <option value="yes">Yes</option>
                             <option value="no">No</option>
                         </select>
 
-                        <textarea class="form-control" rows="3"></textarea>
+                        <textarea class="form-control d-none" rows="3"></textarea>
                     </div>
 
                     <!-- Question 4 -->
                     <div class="mb-4">
-                        <label class="form-label">Are you able to communicate your absences at least 24 hours before any scheduled event?</label>
-                        <select class="form-select">
+                        <label class="form-label">Are you currently serving or have you served in the United States Armed Forces? If yes, state your branch/rank/MOS.</label>
+                        <select class="form-select mb-3 served" required>
                             <option value="">Choose...</option>
                             <option value="yes">Yes</option>
                             <option value="no">No</option>
                         </select>
+
+                        <textarea class="form-control d-none" rows="3"></textarea>
                     </div>
 
                     <!-- Question 5 -->
                     <div class="mb-4">
-                        <label class="form-label">Are you currently serving or have you served in the United States Armed Forces?</label>
-                        <select class="form-select">
+                        <label class="form-label">Are you able to communicate your absences at least 24 hours before any scheduled event?</label>
+                        <select class="form-select" required>
                             <option value="">Choose...</option>
                             <option value="yes">Yes</option>
                             <option value="no">No</option>
@@ -58,69 +67,38 @@
 
                     <!-- Question 6 -->
                     <div class="mb-4">
-                        <label class="form-label">Are you willing to put aside the "Lone Wolf" aspect and become a team member by listening to and following orders given to your by the person in your command?</label>
-                        <select class="form-select">
-                            <option value="">Choose...</option>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                        </select>
+                        <label class="form-label">What days and times are you available to game?</label>
+                        <textarea class="form-control" rows="3" required></textarea>
                     </div>
 
                     <!-- Question 7 -->
                     <div class="mb-4">
-                        <label class="form-label">What are your top 2 preferred classes?</label>
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="assault" id="assault" name="preferred_classes">
-                            <label class="form-check-label" for="assault">
-                                Assault
-                            </label>
-                        </div>
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="medic" id="medic" name="preferred_classes">
-                            <label class="form-check-label" for="medic">
-                                Medic
-                            </label>
-                        </div>
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="support" id="support" name="preferred_classes">
-                            <label class="form-check-label" for="support">
-                                Support
-                            </label>
-                        </div>
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="recon" id="recon" name="preferred_classes">
-                            <label class="form-check-label" for="recon">
-                                Recon
-                            </label>
-                        </div>
+                        <label class="form-label">What timezone do you reside in?</label>
+                        <input type="text" class="form-control" required>
                     </div>
 
                     <!-- Question 8 -->
-                    <div class="mb-4">
-                        <label class="form-label">Why do you want to be a part of the 36th?</label>
-                        <textarea class="form-control" rows="3"></textarea>
+                    <div class="mb-4 preferred-classes">
+                        <label class="form-label">What are your top 2 preferred classes?</label>
+                        <input type="text" class="form-control" required>
                     </div>
 
                     <!-- Question 9 -->
                     <div class="mb-4">
-                        <label class="form-label">What makes you a great fit for our community?</label>
-                        <textarea class="form-control" rows="3"></textarea>
+                        <label class="form-label">Why do you want to be a part of the 36th?</label>
+                        <textarea class="form-control" rows="3" required></textarea>
                     </div>
 
                     <!-- Question 10 -->
                     <div class="mb-4">
                         <label class="form-label">What do you feel is the best thing you can contribute to this community?</label>
-                        <textarea class="form-control" rows="3"></textarea>
+                        <textarea class="form-control" rows="3" required></textarea>
                     </div>
 
                     <!-- Question 11 -->
                     <div class="mb-4">
-                        <label class="form-label">Are you interested in taking on a leadership role?</label>
-                        <select class="form-select">
+                        <label class="form-label">If a leadership opportunity opens up, would you be interested?</label>
+                        <select class="form-select" required>
                             <option value="">Choose...</option>
                             <option value="yes">Yes</option>
                             <option value="no">No</option>
@@ -130,13 +108,25 @@
                     <!-- Question 12 -->
                     <div class="mb-4">
                         <label class="form-label">What is your personal definition of "communication"?</label>
-                        <textarea class="form-control" rows="3"></textarea>
+                        <textarea class="form-control" rows="3" required></textarea>
                     </div>
 
                     <!-- Question 13 -->
                     <div class="mb-4">
-                        <label class="form-label">What is your personal definition of "merit"?</label>
-                        <textarea class="form-control" rows="3"></textarea>
+                        <label class="form-label">What is your personal definition of "integrity"?</label>
+                        <textarea class="form-control" rows="3" required></textarea>
+                    </div>
+
+                    <!-- Question 14 -->
+                    <div class="mb-4">
+                        <label class="form-label">What is your personal definition of "a good leader"?</label>
+                        <textarea class="form-control" rows="3" required></textarea>
+                    </div>
+
+                    <!-- Question 15 -->
+                    <div class="mb-4">
+                        <label class="form-label">Will you be getting Battlefield 2042? Do you already have an Xbox Series X/S?</label>
+                        <textarea class="form-control" rows="3" required></textarea>
                     </div>
 
                     <p class="mb-4">
