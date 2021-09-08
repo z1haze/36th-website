@@ -59,7 +59,7 @@ function validateCheckboxField (field) {
         if (!feedbackEl) {
             feedbackEl = document.createElement('div');
             feedbackEl.classList.add('feedback');
-            feedbackEl.innerHTML = firstCheckbox.dataset.message || 'This field is required.';
+            feedbackEl.innerHTML = firstCheckbox.dataset.missingError || 'This field is required.';
 
             firstCheckbox.parentElement.parentElement.insertBefore(feedbackEl, firstCheckbox.parentElement.parentElement.children[1]);
         }
@@ -80,11 +80,11 @@ function validateField (field) {
     } else {
         let feedbackEl = field.nextElementSibling;
 
-        // make feedback element exists
         if (!feedbackEl || !feedbackEl.classList.contains('feedback')) {
             feedbackEl = document.createElement('div');
             feedbackEl.classList.add('feedback');
 
+            // insert the feedback element directly after the input
             field.parentNode.insertBefore(feedbackEl, field.nextSibling);
         }
 
@@ -106,6 +106,7 @@ function validateField (field) {
  */
 function setupForm (form, cb) {
     form.setAttribute('novalidate', true);
+
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
 
@@ -123,46 +124,11 @@ function setupForm (form, cb) {
             return false;
         }
 
-        let cbResult = {success: true};
+        form.classList.add('submitted');
 
         // do async things
         if (typeof cb === 'function') {
-            cbResult = await cb();
-        }
-
-        if (cbResult.success) {
-            const alert = form.querySelector('.alert-success');
-
-            if (alert) {
-                alert.classList.remove('d-none');
-                alert.scrollIntoView({block: 'center'});
-            }
-
-            form.classList.add('submitted');
-        }
-    });
-}
-
-/**
- * Handle determining requirement of the next element based on the value of the currently selected field
- *
- * @param el
- */
-function handleOptionalRequirement (el) {
-    el.addEventListener('change', (event) => {
-        let optionalField = event.target.nextElementSibling;
-
-        // sometimes the next element is the feedback element, which is not right
-        if (optionalField.tagName.toLowerCase() === 'div') {
-            optionalField = optionalField.nextElementSibling;
-        }
-
-        if (event.target.value === 'yes') {
-            optionalField.setAttribute('required', true);
-            optionalField.classList.remove('d-none');
-        } else {
-            optionalField.removeAttribute('required');
-            optionalField.classList.add('d-none');
+            cb();
         }
     });
 }
@@ -176,21 +142,16 @@ module.exports = {
 
         // contact us form
         if (contactForm) {
-            setupForm(contactForm, () => new Promise((resolve) => {
-                setTimeout(() => resolve({success: true}), 500);
-            }));
+            setupForm(contactForm, () => {
+                const alert = contactForm.querySelector('.alert-success');
+
+                if (alert) {
+                    alert.classList.remove('d-none');
+                    alert.scrollIntoView({block: 'center'});
+                }
+            });
         }
+    },
 
-        const applicationForm = document.getElementById('application-form');
-
-        // application form
-        if (applicationForm) {
-            handleOptionalRequirement(applicationForm.querySelector('.milsim'));
-            handleOptionalRequirement(applicationForm.querySelector('.served'));
-
-            setupForm(applicationForm, () => new Promise((resolve) => {
-                setTimeout(() => resolve({success: true}), 500);
-            }));
-        }
-    }
+    setupForm
 };

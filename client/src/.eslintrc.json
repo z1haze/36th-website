@@ -1,6 +1,6 @@
 {
   "root": true,
-  "extends": "eslint:recommended",
+  "extends": "plugin:vue/recommended",
   "parserOptions": {
     "parser": "babel-eslint",
     "ecmaVersion": 2020,
@@ -11,10 +11,25 @@
     "es6": true,
     "browser": true,
     "jquery": true,
-    "commonjs": true,
-    "node": true
+    "commonjs": true
   },
   "rules": {
+    "vue/no-v-html": "off",
+    "vue/max-attributes-per-line": [
+      "error",
+      {
+        "singleline": 12,
+        "multiline": {
+          "max": 1,
+          "allowFirstLine": true
+        }
+      }
+    ],
+    "vue/html-closing-bracket-newline": "off",
+    "vue/html-indent": [
+      "error",
+      4
+    ],
     "one-var": [
       "error",
       "never"

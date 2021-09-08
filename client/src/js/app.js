@@ -65,4 +65,10 @@ window.addEventListener('load', () => {
 // init form handling
 require('./util/forms').init();
 
+const applicationVue = document.getElementById('application-vue');
+
+if (applicationVue) {
+    require('./vue/application')()
+}
+
 console.log('Loaded! 😀'); // eslint-disable-line no-console

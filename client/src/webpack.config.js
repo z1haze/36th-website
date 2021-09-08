@@ -4,11 +4,15 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin;
 const CopyPlugin = require('copy-webpack-plugin');
+const {VueLoaderPlugin} = require('vue-loader');
+
+require('dotenv').config();
 
 function getPlugins () {
     return [
+        new webpack.EnvironmentPlugin(['OAUTH_CLIENT_ID', 'OAUTH_REDIRECT_URL_LOGIN', 'OAUTH_REDIRECT_URL_JOIN']),
+        new VueLoaderPlugin(),
         new webpack.ProgressPlugin(),
-
         new CleanWebpackPlugin({verbose: true}),
 
         new CopyPlugin({
@@ -30,6 +34,8 @@ function getPlugins () {
                     to  : path.join(__dirname, '..', 'public/webfonts')
                 }
             ]
+        }, {
+            copyUnmodified: true
         }),
 
         new MiniCssExtractPlugin({
@@ -52,6 +58,11 @@ module.exports = (mode, argv) => {
         module: {
             rules: [
                 {
+                    test   : /\.vue$/,
+                    exclude: /node_modules/,
+                    use    : 'vue-loader'
+                },
+                {
                     test: /\.scss$/,
                     use : [
                         MiniCssExtractPlugin.loader,
@@ -73,9 +84,10 @@ module.exports = (mode, argv) => {
         plugins: getPlugins(argv.mode),
 
         resolve: {
-            extensions: ['.js'],
+            extensions: ['.js', '.vue'],
             alias     : {
-                '@': './'
+                'vue$': 'vue/dist/vue.esm.js',
+                '@'   : './'
             }
         },
     };
