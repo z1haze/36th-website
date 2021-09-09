@@ -17,7 +17,7 @@
                 <ul class="mb-3">
                     <li>You have not yet joined the Fighting 36th Discord. Join <a :href="discordInvite">here</a>.</li>
                     <li>You already have a pending application.</li>
-                    <li>Your previous application has been rejected, and you maybe not reapply yet.</li>
+                    <li>Your previous application has been rejected, and you may not yet reapply.</li>
                     <li>You are already a member of The Fighting 36th. Why are you even here?</li>
                 </ul>
             </div>
