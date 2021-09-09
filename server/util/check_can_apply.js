@@ -5,13 +5,18 @@ module.exports = async (discordUserId) => {
         .withGraphFetched('[unitMember]')
         .findById(discordUserId);
 
+    // a user cannot apply if they are not a member of the discord
     if (!discordMember) {
         return false;
     }
 
+    // an existing unit member cannot apply
     if (discordMember.unitMember) {
         return false;
     }
+
+    // pending application check
+    // previously rejected application check
 
     return true;
 };
