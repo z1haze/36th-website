@@ -1,6 +1,6 @@
 const Base = require('./base');
 
-class Member extends Base {
+class UnitMember extends Base {
     static get tableName () {
         return 'unit_members';
     }
@@ -36,6 +36,15 @@ class Member extends Base {
         const BlogPost = require('./blog_post');
 
         return {
+            unitMember: {
+                relation  : Base.BelongsToOneRelation,
+                modelClass: DiscordMember,
+                join      : {
+                    from: 'unit_members.discord_user_id',
+                    to  : 'discord_members.discord_user_id',
+                }
+            },
+
             applications: {
                 relation  : Base.HasManyRelation,
                 modelClass: UnitApplication,
@@ -57,4 +66,4 @@ class Member extends Base {
     }
 }
 
-module.exports = Member;
+module.exports = UnitMember;

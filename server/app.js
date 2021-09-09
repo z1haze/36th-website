@@ -1,29 +1,38 @@
 require('dotenv').config();
 
 const path = require('path');
-const bodyParser = require('body-parser');
 const express = require('express');
 const hbs = require('express-handlebars');
+const {v4: uuidv4} = require('uuid');
 
 // create the express app
 const app = express();
 
 require('./locals')(app);
 
-app.use(bodyParser.urlencoded({ extended: true }));
-
-// pull in our routes file
-app.use('/', require('./routes'));
-
-// set the template engine
-app.engine('hbs', hbs({extname: 'hbs'}));
-app.set('view engine', 'hbs');
-
-// tell express where our views folder is
-app.set('views', path.join(__dirname, 'views'));
-
-// tell express where our public static folder is
-app.use(express.static(path.join(__dirname, '..', 'client/public')));
+app
+    .use(express.urlencoded({extended: true}))
+    .use(express.json())
+    .use(
+        require('express-session')({
+            secret           : process.env.COOKIE_SECRET,
+            resave           : false,
+            saveUninitialized: true,
+            genid            : function () {
+                return uuidv4();
+            },
+            name  : '36th.sid',
+            cookie: {
+                maxAge: eval(process.env.SESSION_MAX_AGE)
+            },
+            store: require('./session/store')
+        })
+    )
+    .use('/', require('./routes'))
+    .use(express.static(path.join(__dirname, '..', 'client/public')))
+    .engine('hbs', hbs({extname: 'hbs'}))
+    .set('view engine', 'hbs')
+    .set('views', path.join(__dirname, 'views'));
 
 // start our app
 app.listen(process.env.APP_PORT, () => {

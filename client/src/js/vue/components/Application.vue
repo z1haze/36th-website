@@ -1,133 +1,89 @@
 <template>
-  <div class="col-12 col-xl-6" id="application-vue">
-    <application-submitted v-if="submitted" />
+    <div id="application-vue" class="col-12 col-xl-6">
+        <template v-if="loaded">
+            <application-submitted v-if="submitted" />
 
-    <form v-else action="" class="mb-6" id="application-form" ref="applicationForm">
-      <div v-for="(question, questionIndex) in questions" :key="`question-${questionIndex}`" class="mb-4">
+            <application-form v-else-if="currentUser && currentUser.canApply" @submit="submitApplication" />
 
-        <label class="form-label" :for="`question-${questionIndex+1}`">
-          <span v-html="question.title"></span>
-          <small v-if="question.optional" class="text-muted">(optional)</small>
-        </label>
+            <div v-else class="alert alert-info mb-xl-5">
+                <h5 class="font-secondary text-uppercase fw-bold">
+                    You are unable to apply to our unit at this time
+                </h5>
 
+                <p class="mb-2">
+                    This is due to at least one of the following reasons:
+                </p>
 
-        <input v-if="question.type === 'text'"
-               type="text" class="form-control"
-               :required="!question.optional"
-               :id="`question-${questionIndex+1}`"
-               @input="updateAnswer($event, questionIndex)"
-        />
-
-        <textarea v-else-if="question.type === 'textarea'"
-                  :required="!question.optional"
-                  class="form-control"
-                  rows="4"
-                  :placeholder="question.placeholder"
-                  :name="`question-${questionIndex+1}`"
-                  :id="`question-${questionIndex+1}`"
-                  @input="updateAnswer($event, questionIndex)"
-        />
-
-        <template v-else-if="question.type === 'checkbox'">
-          <div v-for="(option, optionIndex) in question.options" :key="`option-${optionIndex}`" class="custom-control custom-checkbox">
-            <input :id="`question-${questionIndex+1}-option-${optionIndex+1}`"
-                   :required="(!question.answer || question.answer.length < question.rules.min || question.answer.length > question.rules.max) && !question.optional"
-                   type="checkbox"
-                   class="custom-control-input"
-                   :name="`question-${questionIndex+1}-options[]`"
-                   :value="option"
-                   :data-min="question.rules.min || 0"
-                   :data-max="question.rules.max || 0"
-                   :data-missing-error="question.messages.valueMissing"
-                   @change="updateAnswer($event, questionIndex)">
-            <label class="custom-control-label" :for="`question-${questionIndex+1}-option-${optionIndex+1}`">
-              {{ option }}</label>
-          </div>
+                <ul class="mb-3">
+                    <li>You have not yet joined the Fighting 36th Discord. Join <a :href="discordInvite">here</a>.</li>
+                    <li>You already have a pending application.</li>
+                    <li>Your previous application has been rejected, and you maybe not reapply yet.</li>
+                    <li>You are already a member of The Fighting 36th. Why are you even here?</li>
+                </ul>
+            </div>
         </template>
-
-        <select
-            v-else-if="question.type === 'select'"
-            :required="!question.optional"
-            :name="`question-${questionIndex+1}`"
-            :id="`question-${questionIndex+1}`"
-            class="form-select"
-        >
-          <option v-if="question.placeholder" value="" :label="question.placeholder"></option>
-          <option v-for="(option, optionIndex) in question.options" :key="`option-${optionIndex}`" :value="option" :label="option"/>
-        </select>
-      </div>
-
-      <p class="mb-4">
-        Before submitting this application, please ensure that all of your answers are the best answers that you can give,
-        as they can and will have an effect on whether or not you are accepted into this unit. Please take them seriously.
-      </p>
-
-      <button class="btn btn-special">submit</button>
-    </form>
-  </div>
+    </div>
 </template>
 
 <script>
 import {mapState} from 'vuex';
-import ApplicationSubmitted from './ApplicationSubmitted';
 
-const {setupForm} = require('../../util/forms')
+import ApplicationSubmitted from './ApplicationSubmitted';
+import ApplicationForm from './ApplicationForm';
 
 export default {
-  components: {
-    ApplicationSubmitted
-  },
-
-  data () {
-    return {
-      submitted    : false,
-    }
-  },
-
-  computed: {
-    ...mapState(['questions'])
-  },
-
-  mounted () {
-    const form = this.$refs.applicationForm;
-
-    setupForm(form, () => this.submitApplication());
-  },
-
-  methods: {
-    updateAnswer (evt, questionIndex) {
-      let val = null;
-
-      switch (evt.type) {
-        case 'change':
-          const obj = this.questions[questionIndex];
-          const answer = obj.answer || [];
-
-          if (evt.target.checked) {
-            answer.push(evt.target.value);
-          } else {
-            answer.splice(answer.indexOf(evt.target.value), 1);
-          }
-
-          val = {...obj, answer};
-          break;
-        default:
-          val = {...this.questions[questionIndex], answer: evt.target.value};
-      }
-
-      this.$store.commit('SET', {
-        obj: this.questions,
-        key: questionIndex,
-        val
-      });
+    components: {
+        ApplicationSubmitted,
+        ApplicationForm
     },
 
-    submitApplication () {
-      // simulate submission of application
-      setTimeout(() => {
-        this.submitted = true;
-      }, 250)
+    data () {
+        return {
+            loaded       : false,
+            submitted    : false,
+            discordInvite: process.env.DISCORD_INVITE_URL
+        };
+    },
+
+    computed: {
+        ...mapState(['questions', 'currentUser'])
+    },
+
+    async mounted () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+
+        // without a code, we cant fetch the user info, so we need to send them to discord to get us a code
+        if (!code) {
+            window.location.href = `https://discord.com/api/oauth2/authorize?client_id=${process.env.DISCORD_OAUTH_CLIENT_ID}&redirect_uri=${encodeURIComponent(process.env.APPLY_URL)}&response_type=code&scope=identify`;
+
+            return;
+        }
+
+        // attempt to login the user with the provided code, but if the code fails, reload the application page
+        try {
+            const {data} = await this.axios.post('/login', {code, redirect: process.env.APPLY_URL});
+
+            this.$store.commit('SET', {
+                key: 'currentUser',
+                val: data
+            });
+        } catch (e) {
+            window.location.href = '/apply';
+
+            return;
+        }
+
+        this.loaded = true;
+    },
+
+    methods: {
+        submitApplication () {
+            // simulate submission of application
+            setTimeout(() => {
+                this.submitted = true;
+            }, 250);
+        }
     }
-  }
-}
+};
 </script>

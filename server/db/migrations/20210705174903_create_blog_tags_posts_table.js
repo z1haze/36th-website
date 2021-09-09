@@ -1,6 +1,6 @@
 exports.up = function (knex) {
     return knex.schema.createTable('blog_tags_posts', function (table) {
-        table.increments('tag_id');
+        table.string('tag_id');
         table.string('post_id');
         table.primary(['tag_id', 'post_id']);
         table.timestamps(true, true);

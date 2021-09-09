@@ -2,7 +2,7 @@
   "root": true,
   "extends": "plugin:vue/recommended",
   "parserOptions": {
-    "parser": "babel-eslint",
+    "parser": "@babel/eslint-parser",
     "ecmaVersion": 2020,
     "sourceType": "module",
     "allowImportExportEverywhere": true
