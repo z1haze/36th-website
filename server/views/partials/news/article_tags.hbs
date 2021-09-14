@@ -6,9 +6,9 @@
 
     <div class="col-auto">
         <ul class="article-tags list-unstyled row g-2 mb-0">
-            <li class="col-auto"><a href="#" class="text-decoration-none text-uppercase link-muted fw-normal">dota2</a></li>
-            <li class="col-auto"><a href="#" class="text-decoration-none text-uppercase link-muted fw-normal">esports</a></li>
-            <li class="col-auto"><a href="#" class="text-decoration-none text-uppercase link-muted fw-normal">matches</a></li>
+            {{#each tags}}
+                <li class="col-auto"><a href="#" class="text-decoration-none text-uppercase link-muted fw-normal">{{this.tag_name}}</a></li>
+            {{/each}}
         </ul>
     </div>
 </div>

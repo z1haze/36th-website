@@ -1,7 +1,7 @@
 exports.up = function (knex) {
     return knex.schema.createTable('blog_categories', function (table) {
         table.increments('category_id').primary();
-        table.string('name');
+        table.string('category_name');
         table.timestamps(true, true);
     });
 };

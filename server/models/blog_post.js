@@ -15,6 +15,8 @@ class BlogPost extends Base {
             required: [
                 'discord_user_id',
                 'title',
+                'slug',
+                'main_image',
                 'body',
             ],
 
@@ -22,6 +24,8 @@ class BlogPost extends Base {
                 post_id        : {type: 'integer'},
                 discord_user_id: {type: 'string'},
                 title          : {type: 'string'},
+                slug           : {type: 'string'},
+                main_image     : {type: 'string'},
                 body           : {type: 'string'},
                 published_on   : {type: 'string'}
             }

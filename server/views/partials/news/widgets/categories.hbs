@@ -2,10 +2,8 @@
     <h5 class="aside-heading my-4">Category <span class="text-primary">Filters</span></h5>
 
     <ul>
-        <li><a href="#">Esports ( 12 )</a></li>
-        <li><a href="#">Esports ( 12 )</a></li>
-        <li><a href="#">Esports ( 12 )</a></li>
-        <li><a href="#">Esports ( 12 )</a></li>
-        <li><a href="#">Esports ( 12 )</a></li>
+        {{#each categories}}
+            <li><a href="#">{{this.category_name}} ( {{this.article_count}} )</a></li>
+        {{/each}}
     </ul>
 </div>

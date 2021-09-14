@@ -11,12 +11,12 @@
     <div class="container">
         <div class="row justify-content-xl-between">
             <section class="col-xl pe-xl-5 flex-xl-grow-1 news-articles">
-                {{> news/article }}
-                {{> news/article }}
-                {{> news/article }}
+                {{#each articles}}
+                    {{> news/article article=this }}
+                {{/each}}
             </section>
 
-            {{> news/sidebar }}
+            {{> news/sidebar tags=tags categories=categories}}
         </div>
     </div>
 </main>

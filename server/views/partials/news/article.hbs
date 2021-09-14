@@ -1,33 +1,36 @@
 <article class="card news-article">
-    <img src="/img/article_example.jpg" alt="Article Example" class="card-img-top">
+    <img src="{{article.main_image}}" alt="{{article.title}}" class="card-img-top">
 
     <div class="card-header mt-4 tags">
         <ul class="list-unstyled m-0">
-            <li><a class="btn btn-parallelogram" href="#">Shooter</a></li>
-            <li><a class="btn btn-parallelogram" href="#">Action</a></li>
+            {{#each article.categories}}
+                <li><a class="btn btn-parallelogram" href="#">{{this.category_name}}</a></li>
+            {{/each}}
         </ul>
     </div>
 
     <div class="card-body">
-        <h5 class="card-title"><a href="/news/welcome-play-for-everyone-zombie">Welcome play for everyone zombie</a></h5>
+        <h5 class="card-title"><a href="/news/{{article.slug}}">{{article.title}}</a></h5>
 
-        <div class="author-info">
-            By <a class="link-muted" href="#">Wiggls</a> June 8, 2021
+        <div class="author-info mb-4">
+            By <a class="link-muted" href="#">{{article.author.discord_nickname}}</a> {{article.published_on}}
         </div>
 
-        <p class="card-text my-4">
-            Donec orci enim, bibendum a augue quis, aliquet cursus quam.
-            Pellentesque pulvi condimentum dictum, sapien nibh auctor tortoris vulputate sapien tortor et velit.
-            Sed nulla nisi, congue eu quam vel, molestie grvida ipsum. Curabitr ut lacus vitae tellus lacinia pretium...
-        </p>
+        <div class="article-body">
+            {{#if full}}
+                {{{article.body}}}
+            {{else}}
+                {{{article.brief}}}
+            {{/if}}
+        </div>
     </div>
 
     <div class="card-footer py-4 d-flex justify-content-between">
-        {{#if true}}
-            <a href="/news/some-slug" class="read-more">Read More</a>
+        {{#unless article.full}}
+            <a href="/news/{{article.slug}}" class="read-more">Read More</a>
         {{else}}
-            {{> news/article_tags }}
-        {{/if}}
+            {{> news/article_tags tags=article.tags }}
+        {{/unless}}
 
         <div class="news-share">
             Share:

@@ -15,12 +15,24 @@ routes.get('/history', (req, res) => {
 
 // news main
 routes.get('/news', (req, res) => {
-    res.render('news');
+    const articles = require('./sample_articles.json');
+    const categories = require('./sample_categories');
+    const recentArticles = require('./sample_articles.json');
+    const tags = require('./sample_tags.json');
+
+    res.render('news', {articles, categories, recentArticles, tags});
 });
 
 // news article
 routes.get('/news/:articleSlug', (req, res) => {
-    res.render('news/article');
+    const articles = require('./sample_articles.json');
+
+    const article = articles.find((article) => article.slug === req.params.articleSlug);
+    const categories = require('./sample_categories');
+    const recentArticles = require('./sample_articles.json');
+    const tags = require('./sample_tags.json');
+
+    res.render('news/article', {article, categories, recentArticles, tags});
 });
 
 // sponsors

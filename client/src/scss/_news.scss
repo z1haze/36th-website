@@ -61,6 +61,22 @@
         }
       }
     }
+
+    .article-body {
+      h1, h2, h3, h4, h5 {
+        font-family: $font-family-secondary;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      hr {
+        background-color: $text-muted;
+      }
+
+      h5 {
+        font-size: 1.15rem;
+      }
+    }
   }
 }
 
