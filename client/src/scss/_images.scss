@@ -9,4 +9,5 @@ img + img.burst {
   transform: translate(-50%, -50%);
   display: block;
   z-index: -1;
+  pointer-events: none;
 }
