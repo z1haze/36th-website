@@ -68,7 +68,7 @@ require('./util/forms').init();
 const applicationVue = document.getElementById('application-vue');
 
 if (applicationVue) {
-    require('./vue/application')()
+    require('./vue/application')();
 }
 
 console.log('Loaded! 😀'); // eslint-disable-line no-console
