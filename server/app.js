@@ -11,8 +11,8 @@ const app = express();
 require('./locals')(app);
 
 app
-    .use(express.urlencoded({extended: true}))
     .use(express.json())
+    .use(express.urlencoded({extended: true}))
     .use(
         require('express-session')({
             secret           : process.env.COOKIE_SECRET,

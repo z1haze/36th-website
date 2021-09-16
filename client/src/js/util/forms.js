@@ -1,3 +1,5 @@
+const axios = require('axios');
+
 function validateForm (form) {
     let isValid = true;
 
@@ -143,12 +145,23 @@ module.exports = {
         // contact us form
         if (contactForm) {
             setupForm(contactForm, () => {
-                const alert = contactForm.querySelector('.alert-success');
+                const formData = new URLSearchParams(new FormData(contactForm)).toString();
 
-                if (alert) {
-                    alert.classList.remove('d-none');
-                    alert.scrollIntoView({block: 'center'});
-                }
+                axios.post(contactForm.getAttribute('action'), formData)
+                    .then(() => {
+                        const alert = contactForm.querySelector('.alert-success');
+                        contactForm.querySelector('.alert-danger').classList.add('d-none');
+
+                        alert.classList.remove('d-none');
+                        alert.scrollIntoView({block: 'center'});
+                    })
+                    .catch(() => {
+                        const alert = contactForm.querySelector('.alert-danger');
+                        contactForm.querySelector('.alert-success').classList.add('d-none');
+
+                        alert.classList.remove('d-none');
+                        alert.scrollIntoView({block: 'center'});
+                    });
             });
         }
     },
