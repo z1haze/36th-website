@@ -4,14 +4,14 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin;
 const CopyPlugin = require('copy-webpack-plugin');
-const {VueLoaderPlugin} = require('vue-loader');
+// const {VueLoaderPlugin} = require('vue-loader');
 
 require('dotenv').config();
 
 function getPlugins () {
     return [
         new webpack.EnvironmentPlugin(['DISCORD_OAUTH_CLIENT_ID', 'DISCORD_INVITE_URL', 'APPLY_URL']),
-        new VueLoaderPlugin(),
+        // new VueLoaderPlugin(),
         new webpack.ProgressPlugin(),
         new CleanWebpackPlugin({verbose: true}),
 
@@ -57,11 +57,11 @@ module.exports = (mode, argv) => {
 
         module: {
             rules: [
-                {
-                    test   : /\.vue$/,
-                    exclude: /node_modules/,
-                    use    : 'vue-loader'
-                },
+                // {
+                //     test   : /\.vue$/,
+                //     exclude: /node_modules/,
+                //     use    : 'vue-loader'
+                // },
                 {
                     test: /\.scss$/,
                     use : [
@@ -84,10 +84,10 @@ module.exports = (mode, argv) => {
         plugins: getPlugins(argv.mode),
 
         resolve: {
-            extensions: ['.js', '.vue'],
+            extensions: ['.js'],
             alias     : {
-                'vue$': 'vue/dist/vue.esm.js',
-                '@'   : './'
+                // 'vue$': 'vue/dist/vue.esm.js',
+                '@': './'
             }
         },
     };

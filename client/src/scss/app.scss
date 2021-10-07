@@ -5,7 +5,9 @@
 @import '~@fortawesome/fontawesome-free/scss/regular';
 @import '~@fortawesome/fontawesome-free/scss/solid';
 @import '~animate.css/animate.css';
-@import '~swiper/swiper';
+
+// this is janky, but im not sure wtf is wrong with importing the swiper styles using the tilde
+@import '../node_modules/swiper/swiper';
 
 @import 'global';
 @import 'preloader';
