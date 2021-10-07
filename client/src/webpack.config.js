@@ -10,7 +10,7 @@ require('dotenv').config();
 
 function getPlugins () {
     return [
-        new webpack.EnvironmentPlugin(['DISCORD_OAUTH_CLIENT_ID', 'DISCORD_INVITE_URL', 'APPLY_URL']),
+        // new webpack.EnvironmentPlugin(['DISCORD_OAUTH_CLIENT_ID', 'DISCORD_INVITE_URL', 'APPLY_URL']),
         // new VueLoaderPlugin(),
         new webpack.ProgressPlugin(),
         new CleanWebpackPlugin({verbose: true}),
