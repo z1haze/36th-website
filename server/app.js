@@ -4,6 +4,7 @@ const path = require('path');
 const express = require('express');
 const hbs = require('express-handlebars');
 const {v4: uuidv4} = require('uuid');
+const favicon = require('serve-favicon');
 
 // create the express app
 const app = express();
@@ -30,6 +31,7 @@ app
     )
     .use('/', require('./routes'))
     .use(express.static(path.join(__dirname, '..', 'client/public')))
+    .use(favicon(path.join(__dirname, '..', 'client/public', 'favicon.ico')))
     .engine('hbs', hbs({extname: 'hbs'}))
     .set('view engine', 'hbs')
     .set('views', path.join(__dirname, 'views'));

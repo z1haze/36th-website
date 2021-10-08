@@ -18,6 +18,14 @@ function getPlugins () {
         new CopyPlugin({
             patterns: [
                 {
+                    from: __dirname + '/favicon.ico',
+                    to  : path.join(__dirname, '..', 'public')
+                },
+                {
+                    from: __dirname + '/site.webmanifest',
+                    to  : path.join(__dirname, '..', 'public')
+                },
+                {
                     from: __dirname + '/img',
                     to  : path.join(__dirname, '..', 'public/img')
                 },
