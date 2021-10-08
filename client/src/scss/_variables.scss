@@ -1,0 +1,66 @@
+// layout
+$enable-negative-margins: true;
+
+// colors
+$primary: #cd1c1c;
+$blue-gray: #2a2a32;
+$secondary: #1c1f26;
+$darkest: #131418;
+$body-color: #d4d4d4;
+
+$btn-primary-bg: #23262d;
+$btn-primary-border-color: #2a2b37;
+$btn-primary-box-shader: rgba(0, 0, 0, .35) 0 3px 7px 0;
+
+// fonts
+$font-family-base: 'Poppins', sans-serif;
+$font-family-secondary: 'Oxanium', cursive;
+$font-family-tertiary: 'grinddemolished', sans-serif;
+
+// font sizes
+$h2-font-size: 3rem;
+$h3-font-size: 2.5rem;
+$h4-font-size: 1.35rem;
+
+// forms
+$input-border-radius: 0;
+$input-border-width: 0;
+$input-bg: #292a2e;
+$input-disabled-bg: $input-bg;
+$input-padding-y: 1.3rem;
+$input-padding-x: 1.6rem;
+
+// cards
+
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+
+$theme-colors: map-merge((
+        "darkest":    $darkest,
+        "blue-gray": $blue-gray
+), $theme-colors);
+
+$spacers: map-merge((
+        6: $spacer * 4,
+        7: $spacer * 5,
+        8: $spacer * 6,
+        9: $spacer * 7,
+        10: $spacer * 8,
+        11: $spacer * 9,
+        12: $spacer * 10,
+        13: $spacer * 11,
+        14: $spacer * 12,
+        15: $spacer * 13,
+        16: $spacer * 14,
+        17: $spacer * 15
+), $spacers);
+
+$negative-spacers: if($enable-negative-margins, negativify-map($spacers), null);
+
+// cards
+$card-cap-padding-x: 2.5rem;
+$card-spacer-x: 2.5rem;
+$card-border-width: 0;
+$card-border-radius: 0;
+$card-bg: darken($blue-gray, 4%);
+$card-cap-bg: darken($blue-gray, 4%);

@@ -1,0 +1,36 @@
+#site-footer {
+  .footer-social {
+    a {
+      color: darken($body-color, 10%);
+      transition: color .3s ease;
+
+      &:not(:last-child) {
+        margin-right: .6rem;
+      }
+
+      &:hover {
+        color: $primary;
+      }
+    }
+  }
+
+  .footer-links {
+    li {
+      @include media-breakpoint-up(lg) {
+        text-align: right;
+      }
+
+      a {
+        line-height: 1.9rem;
+        text-decoration: none;
+        color: darken($body-color, 10%);
+        font-size: .9rem;
+      }
+    }
+  }
+
+  .footer-copy {
+    font-size: .9rem;
+    color: darken($body-color, 15%);
+  }
+}

@@ -1,0 +1,9 @@
+<div class="widget widget--categories">
+    <h5 class="aside-heading my-4">Category <span class="text-primary">Filters</span></h5>
+
+    <ul>
+        {{#each categories}}
+            <li><a href="#">{{this.category_name}} ( {{this.article_count}} )</a></li>
+        {{/each}}
+    </ul>
+</div>

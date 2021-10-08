@@ -1,0 +1,15 @@
+<aside class="news-sidebar col-xl">
+    <div class="p-4">
+        {{#if author }}
+            {{> news/widgets/author author=author }}
+        {{/if}}
+
+        {{#if false}}
+            {{> news/widgets/search }}
+        {{/if}}
+
+        {{> news/widgets/categories categories=categories }}
+        {{> news/widgets/articles articles=recentArticles }}
+        {{> news/widgets/tags tags=tags }}
+    </div>
+</aside>

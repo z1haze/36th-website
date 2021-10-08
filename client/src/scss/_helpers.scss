@@ -1,0 +1,28 @@
+.text-rotated {
+  position: absolute;
+  transform: rotate(-90deg);
+  transform-origin: top left;
+  left: 0;
+  top: 50%;
+}
+
+.z-1 {
+  z-index: 1 !important;
+}
+
+.z-n1 {
+  z-index: -1!important;
+}
+
+.desaturate {
+  filter: grayscale(100%);
+}
+
+.link-muted {
+  color: $text-muted;
+  transition: color .5s ease;
+
+  &:hover {
+    color: $primary;
+  }
+}

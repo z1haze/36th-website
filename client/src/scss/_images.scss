@@ -1,0 +1,13 @@
+img {
+  max-width: 100%;
+}
+
+img + img.burst {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+  z-index: -1;
+  pointer-events: none;
+}

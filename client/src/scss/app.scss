@@ -1,0 +1,79 @@
+@import 'variables';
+@import '~bootstrap/scss/bootstrap';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~animate.css/animate.css';
+
+// this is janky, but im not sure wtf is wrong with importing the swiper styles using the tilde
+@import '../node_modules/swiper/swiper';
+
+@import 'global';
+@import 'preloader';
+@import 'helpers';
+@import 'scrollbars';
+@import 'typography';
+@import 'fonts';
+@import 'buttons';
+@import 'forms';
+@import 'images';
+@import 'sliders';
+@import 'backgrounds';
+@import 'header';
+@import 'hero';
+@import 'boxes';
+@import 'cards';
+@import 'widgets';
+@import 'news';
+@import 'aside';
+@import 'streams';
+@import 'breadcrumbs';
+@import 'timeline';
+@import 'footer';
+
+section.intro {
+  .text-rotated {
+    top: 12rem;
+    left: .5rem;
+
+    @include media-breakpoint-up(sm) {
+      top: 12.5rem;
+    }
+
+    @include media-breakpoint-up(md) {
+      top: 13rem;
+    }
+
+    @include media-breakpoint-up(xl) {
+      top: 13.5rem;
+    }
+  }
+}
+
+section.page-info {
+  background-position: center;
+  box-shadow: inset 0px -16px 28px 15px $darkest;
+
+  @include media-breakpoint-up(lg) {
+    background-position: center -250px;
+  }
+
+  .page-title {
+    font-family: $font-family-tertiary;
+    text-align: center;
+    font-size: 2rem;
+
+    @include media-breakpoint-up(sm) {
+      font-size: 2.5rem;
+    }
+
+    @include media-breakpoint-up(md) {
+      font-size: 3rem;
+    }
+
+    @include media-breakpoint-up(lg) {
+      font-size: 3.25rem;
+    }
+  }
+}

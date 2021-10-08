@@ -1,0 +1,239 @@
+#site-header {
+  z-index: 1;
+  position: relative;
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    right: 0;
+  }
+
+  &:before {
+    background-image: url('/img/header_bg.jpg');
+    background-color: $darkest;
+    width: 100%;
+    height: 100%;
+
+    @include media-breakpoint-up(xl) {
+      height: 140px;
+    }
+  }
+
+  @include media-breakpoint-up(xl) {
+    &:after {
+      background-image: url('/img/header_bottom_bg.png');
+      background-position: top center;
+      width: 1499px;
+      max-width: 100%;
+      height: 28px;
+      bottom: -11px;
+      margin: 0 auto;
+    }
+  }
+
+  /**
+   * Header Top Bar
+   */
+  .header-top {
+    border-bottom: 1px solid rgba(50, 49, 49, .7);
+
+    .header-top-left {
+      ul {
+        li {
+          &:first-child {
+            letter-spacing: .09rem;
+          }
+        }
+
+        a {
+          color: $primary;
+        }
+      }
+    }
+  }
+
+  /**
+   * Header Main Nav
+   */
+  nav {
+    > ul {
+      // adds a divider between the hamburger menu and the links for mobile
+      @include media-breakpoint-down(xl) {
+        &:first-child {
+          li:first-of-type {
+            margin-top: 1rem;
+            padding-top: .75rem;
+            border-top: 2px solid opacify($darkest, .1);
+          }
+        }
+      }
+
+      li {
+        position: relative;
+
+        @include media-breakpoint-up(xl) {
+          &:not(:last-child) {
+            margin-right: 2.25rem;
+          }
+        }
+
+        > .submenu {
+          position: absolute;
+          top: 100%;
+          right: 0;
+          left: -.5rem;
+          opacity: 0;
+          visibility: hidden;
+          padding: .8rem 0;
+          min-width: 230px;
+          box-shadow: 0 30px 70px 0 rgba(137, 139, 142, .15);
+          transform: scale(1, 0);
+          transform-origin: 0 0;
+          transition: all 0.35s ease-in-out;
+          border-radius: 2px;
+          border: 1px solid rgba(238, 85, 25, 0.27);
+          background: $secondary;
+
+          li {
+            a {
+              position: relative;
+              font-family: $font-family-secondary;
+              padding: 0 10px 0 25px;
+              line-height: 2.5rem;
+
+              &:hover {
+                color: $primary;
+              }
+            }
+          }
+        }
+
+        &:hover {
+          > a {
+            color: $primary;
+          }
+
+          > ul {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+          }
+        }
+      }
+    }
+
+    a {
+      color: $body-color;
+      text-transform: uppercase;
+      display: block;
+      font-size: .9rem;
+      font-weight: 700;
+      padding: .75rem 0;
+      transition: color .35s ease-in-out;
+      text-decoration: none;
+
+      @include media-breakpoint-up(xl) {
+        display: inline-block;
+        padding: 2rem 0;
+      }
+
+      &:hover {
+        color: $primary;
+      }
+    }
+
+    .logo {
+      position: absolute;
+      left: 50%;
+      top: 20px;
+      transform: translateX(-50%);
+
+      @include media-breakpoint-up(lg) {
+        top: 71px;
+
+        img {
+          max-width: 100px;
+        }
+      }
+
+      @include media-breakpoint-up(xl) {
+        top: -58px;
+
+        img {
+          max-width: 120px;
+        }
+      }
+
+      a {
+        padding: 0;
+      }
+    }
+  }
+}
+
+/**
+* Hamburger Button Mobile
+*/
+#hamburger {
+  position: relative;
+  border-width: 0;
+  width: 32px;
+  height: 20px;
+
+  &:focus {
+    box-shadow: none;
+  }
+
+  &.open {
+    span {
+      &:first-child,
+      &:last-child {
+        top: 9px;
+        width: 0;
+        left: 50%;
+      }
+
+      &:nth-child(2) {
+        transform: rotate(45deg);
+      }
+
+      &:nth-child(3) {
+        transform: rotate(-45deg);
+      }
+    }
+  }
+
+  span {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: darken($body-color, 25%);
+    display: block;
+    transition: all .25s ease-in-out;
+
+    &:first-child {
+      top: 0;
+    }
+
+    &:nth-child(2),
+    &:nth-child(3) {
+      transform-origin: 50% 50%;
+    }
+
+    &:nth-child(2) {
+      top: 9px;
+    }
+
+    &:nth-child(3) {
+      top: 9px;
+    }
+
+    &:last-child {
+      top: 18px;
+    }
+  }
+}

@@ -1,0 +1,44 @@
+<article class="card news-article">
+    <img src="{{article.main_image}}" alt="{{article.title}}" class="card-img-top">
+
+    <div class="card-header mt-4 tags">
+        <ul class="list-unstyled m-0">
+            {{#each article.categories}}
+                <li><a class="btn btn-parallelogram" href="#">{{this.category_name}}</a></li>
+            {{/each}}
+        </ul>
+    </div>
+
+    <div class="card-body">
+        <h5 class="card-title"><a href="/news/{{article.slug}}">{{article.title}}</a></h5>
+
+        <div class="author-info mb-4">
+            By <a class="link-muted" href="#">{{article.author.discord_nickname}}</a> {{article.published_on}}
+        </div>
+
+        <div class="article-body">
+            {{#if full}}
+                {{{article.body}}}
+            {{else}}
+                {{{article.brief}}}
+            {{/if}}
+        </div>
+    </div>
+
+    <div class="card-footer py-4 d-flex justify-content-between">
+        {{#unless article.full}}
+            <a href="/news/{{article.slug}}" class="read-more">Read More</a>
+        {{else}}
+            {{> news/article_tags tags=article.tags }}
+        {{/unless}}
+
+        <div class="news-share">
+            Share:
+            <div class="d-inline-block">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+</article>

@@ -1,0 +1,43 @@
+<form action="/contact" method="post" id="contact-form">
+    <div class="alert alert-success d-flex align-items-center d-none" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+        <div>
+            Thank you for your message! We will get to this ASAP!
+        </div>
+    </div>
+
+    <div class="alert alert-danger d-flex align-items-center d-none" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Error:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+        <div>
+            There was a problem submitting your request
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-sm-6 mb-3 mb-sm-0">
+            <input type="text" placeholder="Your Name" class="form-control" name="name" required>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="col-sm-6">
+            <input type="email"
+                   placeholder="Your Email"
+                   class="form-control"
+                   name="email"
+                   data-missing-error="We need this to contact you!"
+                   data-pattern-error="Your email is not valid!"
+                   pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required />
+        </div>
+    </div>
+
+    <textarea name="message"
+              id="message"
+              class="form-control"
+              name="message"
+              rows="5"
+              placeholder="Your Message"
+              data-range-error="Your message is too short!"
+              minlength="10" required></textarea>
+
+    <button class="btn btn-special mt-4">submit</button>
+</form>

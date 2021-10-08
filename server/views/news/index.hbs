@@ -1,0 +1,22 @@
+{{> header/index }}
+
+<section class="page-info bg-4 py-6 py-sm-8 py-lg-10 py-xl-10 z-n1">
+    <div class="container z-1 position-relative">
+        <h1 class="page-title">News And <span class="text-primary">Info</span></h1>
+        {{> breadcrumbs title="News and Info" }}
+    </div>
+</section>
+
+<main class="mt-xl-n6 news-page">
+    <div class="container">
+        <div class="row justify-content-xl-between">
+            <section class="col-xl pe-xl-5 flex-xl-grow-1 news-articles">
+                {{#each articles}}
+                    {{> news/article article=this }}
+                {{/each}}
+            </section>
+
+            {{> news/sidebar tags=tags categories=categories}}
+        </div>
+    </div>
+</main>

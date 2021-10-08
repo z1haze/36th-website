@@ -1,0 +1,14 @@
+<div class="row g-3 font-secondary">
+    <div class="col-auto">
+        <i class="fas fa-tag text-primary"></i>
+        <strong class="text-uppercase">Tags:</strong>
+    </div>
+
+    <div class="col-auto">
+        <ul class="article-tags list-unstyled row g-2 mb-0">
+            {{#each tags}}
+                <li class="col-auto"><a href="#" class="text-decoration-none text-uppercase link-muted fw-normal">{{this.tag_name}}</a></li>
+            {{/each}}
+        </ul>
+    </div>
+</div>
