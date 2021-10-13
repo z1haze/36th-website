@@ -1,7 +1,7 @@
 const DiscordUser = require('../models/discord_user');
 const DiscordRole = require('../models/discord_role');
 
-async function tryIt () {
+async function getRoster () {
     const members = await DiscordUser.query()
         .withGraphFetched('roles')
         .whereExists(
@@ -42,8 +42,9 @@ async function tryIt () {
         for (const {discord_role_name: platoonRoleName} of platoonRoles) {
             // create the platoon entry
             results.companies[companyRoleName].platoons[platoonRoleName] = {
-                platoonLeader: null,
-                squads       : {}
+                platoonLeader  : null,
+                platoonSergeant: null,
+                squads         : {}
             };
 
             // actual platoon number
@@ -103,23 +104,34 @@ async function tryIt () {
 
         if (companyLeadershipRole) {
             member.companyLeadershipRole = companyLeadershipRole;
+            results.companies[member.company.discord_role_name].companyLeaders.push(member);
+
+            continue;
         }
 
         const platoonRoleIds = process.env[`${companyName.toUpperCase()}_COMPANY_PLATOON_ROLE_IDS`].split(',');
         const platoonRole = member.roles.find(({discord_role_id}) => platoonRoleIds.includes(discord_role_id));
 
+        // platoon members can be platoon leaders or platoon sergeants
         if (platoonRole) {
             member.platoon = platoonRole;
-        }
 
-        if (companyLeadershipRole) {
-            if (platoonRole) {
+            const platoonLeaderRole = member.roles.find(({discord_role_id}) => discord_role_id === process.env[`${companyName.toUpperCase()}_COMPANY_PLATOON_LEADER_ROLE_ID`]);
+            const platoonSergeantRole = member.roles.find(({discord_role_id}) => discord_role_id === process.env[`${companyName.toUpperCase()}_COMPANY_PLATOON_SERGEANT_ROLE_ID`]);
+
+            if (platoonLeaderRole) {
+                member.platoonLeaderRole = platoonLeaderRole;
+
                 results.companies[member.company.discord_role_name].platoons[member.platoon.discord_role_name].platoonLeader = member;
-            } else {
-                results.companies[member.company.discord_role_name].companyLeaders.push(member);
+            } else if (platoonSergeantRole) {
+                member.platoonSergeantRole = platoonSergeantRole;
+
+                results.companies[member.company.discord_role_name].platoons[member.platoon.discord_role_name].platoonSergeant = member;
             }
 
-            continue;
+            if (platoonLeaderRole || platoonSergeantRole) {
+                continue;
+            }
         }
 
         // otherwise member is not in company leadership and should be assigned to a squad
@@ -129,11 +141,14 @@ async function tryIt () {
         if (squadRole) {
             member.squad = squadRole;
 
-            if (member.roles.find(({discord_role_id}) => discord_role_id === process.env.SQUAD_LEADER_ROLE_ID)) {
-                member.squadLeader = true;
+            const squadLeaderRole = member.roles.find(({discord_role_id}) => discord_role_id === process.env.SQUAD_LEADER_ROLE_ID);
+            const fireTeamLeaderRole = member.roles.find(({discord_role_id}) => discord_role_id === process.env.FIRE_TEAM_LEADER_ROLE_ID);
+
+            if (squadLeaderRole) {
+                member.squadLeaderRole = squadLeaderRole;
                 results.companies[member.company.discord_role_name].platoons[member.platoon.discord_role_name].squads[member.squad.discord_role_name].squadLeader = member;
-            } else if (member.roles.find(({discord_role_id}) => discord_role_id === process.env.FIRE_TEAM_LEADER_ROLE_ID)) {
-                member.fireTeamLeader = true;
+            } else if (fireTeamLeaderRole) {
+                member.fireTeamLeaderRole = fireTeamLeaderRole;
                 results.companies[member.company.discord_role_name].platoons[member.platoon.discord_role_name].squads[member.squad.discord_role_name].fireTeamLeaders.push(member);
             } else {
                 results.companies[member.company.discord_role_name].platoons[member.platoon.discord_role_name].squads[member.squad.discord_role_name].squadMembers.push(member);
@@ -148,7 +163,7 @@ async function tryIt () {
 }
 
 module.exports = async (req, res) => {
-    const roster = await tryIt();
+    const roster = await getRoster();
 
     // temp
     delete roster.companies['Bravo Company "Berserkers"'];

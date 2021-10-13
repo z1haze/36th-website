@@ -92,7 +92,24 @@
 
                                         <div class="col">
                                             <h5 class="font-secondary">{{this.platoonLeader.displayName}}</h5>
-                                            <div>Platoon Leader</div>
+                                            <div>{{this.platoonLeaderRole.discord_role_name}}</div>
+                                        </div>
+                                    </div>
+                                </li>
+                            {{/if}}
+
+                            {{#if this.platoonSergeant}}
+                                <li class="mb-3">
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <img class="rounded-circle"
+                                                 src="https://cdn.discordapp.com/avatars/{{this.platoonSergeant.discord_user_id}}/{{this.platoonSergeant.discord_avatar_hash}}"
+                                                 alt="{{this.platoonSergeant.displayName}}" width="75"/>
+                                        </div>
+
+                                        <div class="col">
+                                            <h5 class="font-secondary">{{this.platoonSergeant.displayName}}</h5>
+                                            <div>{{this.platoonSergeantRole.discord_role_name}}</div>
                                         </div>
                                     </div>
                                 </li>
@@ -114,7 +131,7 @@
 
                                             <div class="col">
                                                 <h5 class="font-secondary">{{this.squadLeader.displayName}}</h5>
-                                                <div>Squad Leader</div>
+                                                <div>{{this.squadLeader.squadLeaderRole.discord_role_name}}</div>
                                             </div>
                                         </div>
                                     </li>
@@ -131,7 +148,7 @@
 
                                             <div class="col">
                                                 <h5 class="font-secondary">{{this.displayName}}</h5>
-                                                <div>Fire Team Leader</div>
+                                                <div>{{this.fireTeamLeaderRole.discord_role_name}}</div>
                                             </div>
                                         </div>
                                     </li>
