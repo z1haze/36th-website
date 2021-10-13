@@ -1,0 +1,162 @@
+{{> header/index }}
+
+<section class="page-info bg-4 py-6 py-sm-8 py-lg-10 py-xl-10 z-n1">
+    <div class="container z-1 position-relative">
+        <h1 class="page-title">Unit <span class="text-primary">Roster</span></h1>
+        {{> breadcrumbs title="Unit Roster" }}
+    </div>
+</section>
+
+<main class="mt-xl-n6 roster-page">
+    <div class="container mb-3 mb-xl-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-xl-4">
+                <h3 class="font-special text-center mb-5">Unit Leadership</h3>
+
+                <ul class="list-unstyled roster mb-6">
+                    {{#each roster.unitLeaders}}
+                        <li class="mb-3">
+                            <div class="row">
+                                <div class="col-auto">
+                                    <img class="rounded-circle"
+                                         src="https://cdn.discordapp.com/avatars/{{this.discord_user_id}}/{{this.discord_avatar_hash}}"
+                                         alt="{{this.displayName}}" width="75"/>
+                                </div>
+
+                                <div class="col">
+                                    <h5 class="font-secondary">{{this.displayName}}</h5>
+                                    <div>{{this.unitLeadershipRole.discord_role_name}}</div>
+                                </div>
+                            </div>
+                        </li>
+                    {{/each}}
+                </ul>
+
+                <h3 class="font-special text-center mb-5">Battalion Leadership</h3>
+
+                <ul class="list-unstyled roster mb-6">
+                    {{#each roster.battalionLeaders}}
+                        <li class="mb-3">
+                            <div class="row">
+                                <div class="col-auto">
+                                    <img class="rounded-circle"
+                                         src="https://cdn.discordapp.com/avatars/{{this.discord_user_id}}/{{this.discord_avatar_hash}}"
+                                         alt="{{this.displayName}}" width="75"/>
+                                </div>
+
+                                <div class="col">
+                                    <h5 class="font-secondary">{{this.displayName}}</h5>
+                                    <div>{{this.battalionLeadershipRole.discord_role_name}}</div>
+                                </div>
+                            </div>
+                        </li>
+                    {{/each}}
+                </ul>
+
+                {{#each roster.companies}}
+                    <h3 class="font-special text-center mb-5">{{@key}}</h3>
+
+                    {{#if this.companyLeaders.length}}
+                        <ul class="list-unstyled roster">
+                            {{#each this.companyLeaders}}
+                                <li class="mb-3">
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <img class="rounded-circle"
+                                                 src="https://cdn.discordapp.com/avatars/{{this.discord_user_id}}/{{this.discord_avatar_hash}}"
+                                                 alt="{{this.displayName}}" width="75"/>
+                                        </div>
+
+                                        <div class="col">
+                                            <h5 class="font-secondary">{{this.displayName}}</h5>
+                                            <div>{{this.companyLeadershipRole.discord_role_name}}</div>
+                                        </div>
+                                    </div>
+                                </li>
+                            {{/each}}
+                        </ul>
+                    {{/if}}
+
+                    {{#each this.platoons}}
+                        <h4 class="font-special text-center mb-3">{{@key}}</h4>
+
+                        <ul class="list-unstyled roster">
+                            {{#if this.platoonLeader}}
+                                <li class="mb-3">
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <img class="rounded-circle"
+                                                 src="https://cdn.discordapp.com/avatars/{{this.platoonLeader.discord_user_id}}/{{this.platoonLeader.discord_avatar_hash}}"
+                                                 alt="{{this.platoonLeader.displayName}}" width="75"/>
+                                        </div>
+
+                                        <div class="col">
+                                            <h5 class="font-secondary">{{this.platoonLeader.displayName}}</h5>
+                                            <div>Platoon Leader</div>
+                                        </div>
+                                    </div>
+                                </li>
+                            {{/if}}
+                        </ul>
+
+                        {{#each this.squads}}
+                            <h4 class="font-special text-center mb-3">{{@key}}</h4>
+
+                            <ul class="list-unstyled roster">
+                                {{#if this.squadLeader}}
+                                    <li class="mb-3">
+                                        <div class="row">
+                                            <div class="col-auto">
+                                                <img class="rounded-circle"
+                                                     src="https://cdn.discordapp.com/avatars/{{this.squadLeader.discord_user_id}}/{{this.squadLeader.discord_avatar_hash}}"
+                                                     alt="{{this.squadLeader.displayName}}" width="75"/>
+                                            </div>
+
+                                            <div class="col">
+                                                <h5 class="font-secondary">{{this.squadLeader.displayName}}</h5>
+                                                <div>Squad Leader</div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {{/if}}
+
+                                {{#each this.fireTeamLeaders}}
+                                    <li class="mb-3">
+                                        <div class="row">
+                                            <div class="col-auto">
+                                                <img class="rounded-circle"
+                                                     src="https://cdn.discordapp.com/avatars/{{this.discord_user_id}}/{{this.discord_avatar_hash}}"
+                                                     alt="{{this.displayName}}" width="75"/>
+                                            </div>
+
+                                            <div class="col">
+                                                <h5 class="font-secondary">{{this.displayName}}</h5>
+                                                <div>Fire Team Leader</div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {{/each}}
+
+                                {{#each this.squadMembers}}
+                                    <li class="mb-3">
+                                        <div class="row">
+                                            <div class="col-auto">
+                                                <img class="rounded-circle"
+                                                     src="https://cdn.discordapp.com/avatars/{{this.discord_user_id}}/{{this.discord_avatar_hash}}"
+                                                     alt="{{this.displayName}}" width="75"/>
+                                            </div>
+
+                                            <div class="col">
+                                                <h5 class="font-secondary">{{this.displayName}}</h5>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {{/each}}
+                            </ul>
+                        {{/each}}
+                    {{/each}}
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</main>

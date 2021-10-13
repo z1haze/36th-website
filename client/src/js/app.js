@@ -71,4 +71,17 @@ require('./util/forms').init();
 //     require('./vue/application')();
 // }
 
+const roster = document.querySelectorAll('ul.roster');
+
+if (roster.length) {
+    roster.forEach((el) => {
+        el.querySelectorAll('img')
+            .forEach((img) => {
+                img.addEventListener('error', () => {
+                    img.setAttribute('src', '/img/basic.png');
+                });
+            });
+    });
+}
+
 console.log('Loaded! 😀'); // eslint-disable-line no-console

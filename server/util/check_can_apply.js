@@ -1,4 +1,4 @@
-const DiscordMember = require('../models/discord_member');
+const DiscordMember = require('../models/discord_user');
 
 module.exports = async (discordUserId) => {
     const discordMember = await DiscordMember.query()
