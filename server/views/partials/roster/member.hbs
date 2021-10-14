@@ -1,7 +1,7 @@
 <li class="p-4 {{#if member.leadershipRole}}leadership{{/if}}">
     <div class="row justify-content-between align-items-center">
         <!-- member info -->
-        <div class="col-auto d-flex">
+        <div class="col-9 col-xl-auto d-flex">
             <img class="rounded-circle me-3 lazy"
                  data-src="{{#if member.discord_avatar_hash}}https://cdn.discordapp.com/avatars/{{member.discord_user_id}}/{{member.discord_avatar_hash}}{{else}}/img/basic.png{{/if}}"
                  alt="{{member.displayName}}" width="65"/>
@@ -16,7 +16,7 @@
         </div>
 
         <!-- rank image -->
-        <div class="col-auto">
+        <div class="col-3 col-xl-auto">
             <div class="rounded-circle rank shadow-sm">
                 <img class="rounded-circle lazy"
                      data-src="/svg/ranks/{{member.rankRole.discord_role_name}}.svg"

@@ -9,6 +9,10 @@ ul.roster {
     padding-bottom: 1rem;
     background-color: darken($dark, 2%);
 
+    &.leadership {
+      background-color: $dark;
+    }
+
     &:not(:first-child) {
       border-top: 1px solid #292929;
     }
@@ -29,11 +33,8 @@ ul.roster {
       img {
         position: relative;
         top: -3px;
+        max-width: 100%;
       }
-    }
-
-    &.leadership {
-      background-color: $dark;
     }
   }
 }
