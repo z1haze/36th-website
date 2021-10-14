@@ -2,6 +2,11 @@ const DiscordUser = require('../models/discord_user');
 const DiscordRole = require('../models/discord_role');
 
 async function getRoster () {
+    /**
+     * Get all users in the database that have the member role
+     *
+     * @type {Objection.ModelObject<DiscordUser>[]}
+     */
     const members = await DiscordUser.query()
         .withGraphFetched('roles')
         .whereExists(
@@ -10,24 +15,68 @@ async function getRoster () {
         )
         .then((results) => results.map((result) => result.toJSON()));
 
+    /**
+     * Get all company roles that exist in the database
+     *
+     * @type {DiscordRole[]}
+     */
     const companyRoles = await DiscordRole.query()
         .whereIn('discord_role_id', process.env.COMPANY_ROLE_IDS.split(','));
 
+    /**
+     * Stub the roster results object
+     *
+     * @type {{unitLeaders: *[], companies: {}, battalionLeaders: *[]}}
+     */
     const results = {
         unitLeaders     : [],
         battalionLeaders: [],
         companies       : {}
     };
 
+    const platoonRoles = {};
+    const squadRoles = {};
+
+    for (const {discord_role_name: companyRoleName} of companyRoles) {
+        if (companyRoleName.toLowerCase().includes('item')) {
+            continue;
+        }
+
+        /**
+         * Get the name of the company from the company name
+         * @type {string}
+         */
+        const companyName = companyRoleName.substr(0, companyRoleName.indexOf(' '));
+
+        /**
+         * Fetch the platoon roles for the current company
+         *
+         * @type {DiscordRole[]}
+         */
+        platoonRoles[companyName.toLowerCase()] = await DiscordRole.query()
+            .whereIn('discord_role_id', process.env[`${companyName.toUpperCase()}_COMPANY_PLATOON_ROLE_IDS`].split(','));
+
+        /**
+         * Fetch the squad roles for the current platoon
+         * 
+         * @type {DiscordRole[]}
+         */
+        squadRoles[companyName.toLowerCase()] = await DiscordRole.query()
+            .whereIn('discord_role_id', process.env[`${companyName.toUpperCase()}_COMPANY_SQUAD_ROLE_IDS`].split(','))
+            .orderBy('discord_role_position', 'desc');
+    }
+
+    /**
+     * Loop over each company, and stub out the leaders, platoons, and squads
+     */
     for (const {discord_role_name: companyRoleName} of companyRoles) {
         if (companyRoleName.toLowerCase().includes('item')) {
             continue;
         }
 
         const companyName = companyRoleName.substr(0, companyRoleName.indexOf(' '));
-
-        const platoonRoles = await DiscordRole.query()
-            .whereIn('discord_role_id', process.env[`${companyName.toUpperCase()}_COMPANY_PLATOON_ROLE_IDS`].split(','));
+        const currentPlatoonRoles = platoonRoles[companyName.toLowerCase()];
+        const currentSquadRoles = squadRoles[companyName.toLowerCase()];
 
         // create the company entry
         results.companies[companyRoleName] = {
@@ -35,11 +84,7 @@ async function getRoster () {
             platoons      : {}
         };
 
-        const squadRoles = await DiscordRole.query()
-            .whereIn('discord_role_id', process.env[`${companyName.toUpperCase()}_COMPANY_SQUAD_ROLE_IDS`].split(','))
-            .orderBy('discord_role_position', 'desc');
-
-        for (const {discord_role_name: platoonRoleName} of platoonRoles) {
+        for (const {discord_role_name: platoonRoleName} of currentPlatoonRoles) {
             // create the platoon entry
             results.companies[companyRoleName].platoons[platoonRoleName] = {
                 platoonLeader  : null,
@@ -51,7 +96,7 @@ async function getRoster () {
             const platoonNumber = platoonRoleName.match(/^\w+\s(\d)/)[1];
 
             // create the squad entries
-            for (const {discord_role_name: squadRoleName} of squadRoles) {
+            for (const {discord_role_name: squadRoleName} of currentSquadRoles) {
                 // platoon number designation in squad name
                 const squadPlatoonNumber = squadRoleName.match(/^\d\/(\d)/)[1];
 
