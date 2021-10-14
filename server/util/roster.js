@@ -54,7 +54,8 @@ async function getRoster () {
          * @type {DiscordRole[]}
          */
         platoonRoles[companyName.toLowerCase()] = await DiscordRole.query()
-            .whereIn('discord_role_id', process.env[`${companyName.toUpperCase()}_COMPANY_PLATOON_ROLE_IDS`].split(','));
+            .whereIn('discord_role_id', process.env[`${companyName.toUpperCase()}_COMPANY_PLATOON_ROLE_IDS`].split(','))
+            .orderBy('discord_role_position', 'desc');
 
         /**
          * Fetch the squad roles for the current platoon
