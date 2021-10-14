@@ -114,12 +114,15 @@ async function getRoster () {
 
     const unitLeadershipRoleIds = process.env.UNIT_LEADERSHIP_ROLE_IDS.split(',');
     const battalionLeadershipRoleIds = process.env.BATTALION_LEADERSHIP_ROLE_IDS.split(',');
+    const rankRoleIds = process.env.RANK_ROLE_IDS.split(',');
 
     for (const member of members) {
+        member.rankRole = member.roles.find(({discord_role_id}) => rankRoleIds.includes(discord_role_id));
+
         const unitLeadershipRole = member.roles.find(({discord_role_id}) => unitLeadershipRoleIds.includes(discord_role_id));
 
         if (unitLeadershipRole) {
-            member.unitLeadershipRole = unitLeadershipRole;
+            member.leadershipRole = unitLeadershipRole;
             results.unitLeaders.push(member);
 
             // if the member is a unit leader, we don't need to drill any further
@@ -129,7 +132,7 @@ async function getRoster () {
         const battalionLeadershipRole = member.roles.find(({discord_role_id}) => battalionLeadershipRoleIds.includes(discord_role_id));
 
         if (battalionLeadershipRole) {
-            member.battalionLeadershipRole = battalionLeadershipRole;
+            member.leadershipRole = battalionLeadershipRole;
             results.battalionLeaders.push(member);
 
             // if the member is a battalion leader, we don't need to drill any further
@@ -137,20 +140,20 @@ async function getRoster () {
         }
 
         // everyone else _should_ have a company!
-        member.company = member.roles.find((r1) => companyRoles.find((r2) => r1.discord_role_id === r2.discord_role_id));
+        member.companyRole = member.roles.find((r1) => companyRoles.find((r2) => r1.discord_role_id === r2.discord_role_id));
 
         // item company members do not need to be processed
-        if (member.company.discord_role_name.toLowerCase().includes('item')) {
+        if (member.companyRole.discord_role_name.toLowerCase().includes('item')) {
             continue;
         }
 
-        const companyName = member.company.discord_role_name.substr(0, member.company.discord_role_name.indexOf(' '));
+        const companyName = member.companyRole.discord_role_name.substr(0, member.companyRole.discord_role_name.indexOf(' '));
         const companyLeadershipRoleIds = process.env[`${companyName.toUpperCase()}_COMPANY_LEADERSHIP_ROLE_IDS`].split(',');
         const companyLeadershipRole = member.roles.find(({discord_role_id}) => companyLeadershipRoleIds.includes(discord_role_id));
 
         if (companyLeadershipRole) {
-            member.companyLeadershipRole = companyLeadershipRole;
-            results.companies[member.company.discord_role_name].companyLeaders.push(member);
+            member.leadershipRole = companyLeadershipRole;
+            results.companies[member.companyRole.discord_role_name].companyLeaders.push(member);
 
             continue;
         }
@@ -166,13 +169,13 @@ async function getRoster () {
             const platoonSergeantRole = member.roles.find(({discord_role_id}) => discord_role_id === process.env[`${companyName.toUpperCase()}_COMPANY_PLATOON_SERGEANT_ROLE_ID`]);
 
             if (platoonLeaderRole) {
-                member.platoonLeaderRole = platoonLeaderRole;
+                member.leadershipRole = platoonLeaderRole;
 
-                results.companies[member.company.discord_role_name].platoons[member.platoon.discord_role_name].platoonLeader = member;
+                results.companies[member.companyRole.discord_role_name].platoons[member.platoon.discord_role_name].platoonLeader = member;
             } else if (platoonSergeantRole) {
-                member.platoonSergeantRole = platoonSergeantRole;
+                member.leadershipRole = platoonSergeantRole;
 
-                results.companies[member.company.discord_role_name].platoons[member.platoon.discord_role_name].platoonSergeant = member;
+                results.companies[member.companyRole.discord_role_name].platoons[member.platoon.discord_role_name].platoonSergeant = member;
             }
 
             if (platoonLeaderRole || platoonSergeantRole) {
@@ -191,19 +194,61 @@ async function getRoster () {
             const fireTeamLeaderRole = member.roles.find(({discord_role_id}) => discord_role_id === process.env.FIRE_TEAM_LEADER_ROLE_ID);
 
             if (squadLeaderRole) {
-                member.squadLeaderRole = squadLeaderRole;
-                results.companies[member.company.discord_role_name].platoons[member.platoon.discord_role_name].squads[member.squad.discord_role_name].squadLeader = member;
+                member.leadershipRole = squadLeaderRole;
+                results.companies[member.companyRole.discord_role_name].platoons[member.platoon.discord_role_name].squads[member.squad.discord_role_name].squadLeader = member;
             } else if (fireTeamLeaderRole) {
-                member.fireTeamLeaderRole = fireTeamLeaderRole;
-                results.companies[member.company.discord_role_name].platoons[member.platoon.discord_role_name].squads[member.squad.discord_role_name].fireTeamLeaders.push(member);
+                member.leadershipRole = fireTeamLeaderRole;
+                results.companies[member.companyRole.discord_role_name].platoons[member.platoon.discord_role_name].squads[member.squad.discord_role_name].fireTeamLeaders.push(member);
             } else {
-                results.companies[member.company.discord_role_name].platoons[member.platoon.discord_role_name].squads[member.squad.discord_role_name].squadMembers.push(member);
+                results.companies[member.companyRole.discord_role_name].platoons[member.platoon.discord_role_name].squads[member.squad.discord_role_name].squadMembers.push(member);
             }
         }
     }
 
-    results.unitLeaders = results.unitLeaders.sort((a, b) => b.unitLeadershipRole.discord_role_position - a.unitLeadershipRole.discord_role_position);
-    results.battalionLeaders = results.battalionLeaders.sort((a, b) => b.battalionLeadershipRole.discord_role_position - a.battalionLeadershipRole.discord_role_position);
+    /**
+     * Order the unit and battalion leaders by order of leadership role position
+     */
+    results.unitLeaders = results.unitLeaders.sort((a, b) => b.leadershipRole.discord_role_position - a.leadershipRole.discord_role_position);
+    results.battalionLeaders = results.battalionLeaders.sort((a, b) => b.leadershipRole.discord_role_position - a.leadershipRole.discord_role_position);
+
+    /**
+     * Purge any empty unit elements, eg empty squads, platoons
+     */
+    for (const ckey in results.companies) {
+        const company = results.companies[ckey];
+
+        for (const pkey in results.companies[ckey].platoons) {
+            const platoon = company.platoons[pkey];
+
+            for (const skey in platoon.squads) {
+                const squad = platoon.squads[skey];
+
+                if (squad.squadLeader) {
+                    continue;
+                }
+
+                if (squad.fireTeamLeaders.length) {
+                    continue;
+                }
+
+                if (squad.squadMembers.length) {
+                    continue;
+                }
+
+                delete platoon.squads[skey];
+            }
+
+            // if the squad is empty, remove it
+            if (Object.keys(platoon.squads).length === 0) {
+                delete platoon.squads;
+
+                // if the platoon is empty, remove it
+                if (!platoon.platoonLeader && !platoon.platoonSergeant) {
+                    delete results.companies[ckey].platoons[pkey];
+                }
+            }
+        }
+    }
 
     return results;
 }

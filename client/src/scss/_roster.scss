@@ -1,7 +1,39 @@
 ul.roster {
+  h6 {
+    margin-bottom: .75rem;
+  }
+
   li {
     font-size: .85rem;
     border-bottom: 1px solid $dark;
     padding-bottom: 1rem;
+    background-color: darken($dark, 2%);
+
+    &:not(:first-child) {
+      border-top: 1px solid #292929;
+    }
+
+    &:not(:last-child) {
+      border-bottom: 1px solid #111111;
+    }
+
+    .rank {
+      width: 75px;
+      height: 75px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: darken($dark, 3%);
+      border: 1px solid darken($dark, 3.5%);
+
+      img {
+        position: relative;
+        top: -3px;
+      }
+    }
+
+    &.leadership {
+      background-color: $dark;
+    }
   }
 }
