@@ -71,4 +71,6 @@ require('./util/forms').init();
 //     require('./vue/application')();
 // }
 
+require('./util/lazyload')();
+
 console.log('Loaded! 😀'); // eslint-disable-line no-console

@@ -32,7 +32,10 @@ app
     .use('/', require('./routes'))
     .use(express.static(path.join(__dirname, '..', 'client/public')))
     .use(favicon(path.join(__dirname, '..', 'client/public', 'favicon.ico')))
-    .engine('hbs', hbs({extname: 'hbs'}))
+    .engine('hbs', hbs({
+        extname: 'hbs',
+        helpers: require('./handlebars_helpers')
+    }))
     .set('view engine', 'hbs')
     .set('views', path.join(__dirname, 'views'));
 

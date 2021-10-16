@@ -1,0 +1,49 @@
+ul.roster {
+  h6 {
+    margin-bottom: .75rem;
+  }
+
+  li {
+    font-size: .85rem;
+    border-bottom: 1px solid $dark;
+    padding-bottom: 1rem;
+    background-color: darken($dark, 2%);
+    transition: all .3s ease;
+
+    &.leadership {
+      background-color: $dark;
+    }
+
+    &:not(:first-child) {
+      border-top: 1px solid #292929;
+    }
+
+    &:not(:last-child) {
+      border-bottom: 1px solid #111111;
+    }
+
+    .rank {
+      width: 75px;
+      height: 75px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: darken($dark, 3%);
+      border: 1px solid darken($dark, 3.5%);
+
+      img {
+        position: relative;
+        top: -2px;
+        max-width: 100%;
+      }
+    }
+
+    @include media-breakpoint-up(xl) {
+      &:hover {
+        z-index: 2;
+        box-shadow: 0px 0px 20px 10px rgba(0,0,0,0.35);
+        transform: scale(1.02);
+      }
+    }
+  }
+}
