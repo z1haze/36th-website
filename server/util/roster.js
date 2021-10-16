@@ -1,6 +1,23 @@
 const DiscordUser = require('../models/discord_user');
 const DiscordRole = require('../models/discord_role');
 
+function sortMembers (arr, roleSort = false) {
+    return arr.sort((a, b) => {
+        let diff = 0;
+
+        if (roleSort) {
+            diff = b.leadershipRole.discord_role_position - a.leadershipRole.discord_role_position;
+        }
+
+        if (diff === 0) {
+            diff = b.rankRole.discord_role_position - a.rankRole.discord_role_position;
+        }
+
+        return diff;
+    });
+
+}
+
 async function getRoster () {
     /**
      * Get all users in the database that have the member role
@@ -205,11 +222,24 @@ async function getRoster () {
         }
     }
 
-    /**
-     * Order the unit and battalion leaders by order of leadership role position
-     */
-    results.unitLeaders = results.unitLeaders.sort((a, b) => b.leadershipRole.discord_role_position - a.leadershipRole.discord_role_position);
-    results.battalionLeaders = results.battalionLeaders.sort((a, b) => b.leadershipRole.discord_role_position - a.leadershipRole.discord_role_position);
+    for (const companyName in results.companies) {
+        const company = results.companies[companyName];
+
+        company.companyLeaders = sortMembers(company.companyLeaders, true);
+
+        for (const platoonName in company.platoons) {
+            const platoon = company.platoons[platoonName];
+
+            for (const squadName in platoon.squads) {
+                const squad = platoon.squads[squadName];
+
+                squad.squadMembers = sortMembers(squad.squadMembers);
+            }
+        }
+    }
+
+    results.unitLeaders = sortMembers(results.unitLeaders, true);
+    results.battalionLeaders = sortMembers(results.battalionLeaders, true);
 
     /**
      * Purge any empty unit elements, eg empty squads, platoons
