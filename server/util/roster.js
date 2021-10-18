@@ -233,10 +233,15 @@ async function getRoster () {
             for (const squadName in platoon.squads) {
                 const squad = platoon.squads[squadName];
 
+                // sort the squad members by rank
                 squad.squadMembers = sortMembers(squad.squadMembers);
             }
         }
     }
+
+    /**
+     * Sort the leadership by position first, followed by rank
+     */
 
     results.unitLeaders = sortMembers(results.unitLeaders, true);
     results.battalionLeaders = sortMembers(results.battalionLeaders, true);
