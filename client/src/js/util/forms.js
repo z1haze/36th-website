@@ -1,5 +1,11 @@
 const axios = require('axios');
 
+/**
+ * Validates a form using html5 validation rules
+ *
+ * @param form
+ * @returns {boolean}
+ */
 function validateForm (form) {
     let isValid = true;
 
@@ -76,6 +82,11 @@ function validateCheckboxField (field) {
     }
 }
 
+/**
+ * Validate a form field
+ *
+ * @param field
+ */
 function validateField (field) {
     if (field.type === 'checkbox') {
         validateCheckboxField(field);
@@ -110,10 +121,15 @@ function setupForm (form, cb) {
     form.setAttribute('novalidate', true);
 
     form.addEventListener('submit', async (event) => {
-        event.preventDefault();
+        // only if there is a callback function do we want to prevent the default form behavior
+        if (typeof cb === 'function') {
+            event.preventDefault();
+        }
 
         // prevent multiple submissions
         if (event.currentTarget.classList.contains('submitted')) {
+            alert('Relax, you already submitted this once.');
+
             return false;
         }
 
@@ -145,6 +161,12 @@ module.exports = {
         // contact us form
         if (contactForm) {
             setupForm(contactForm, () => {
+                const submitBtn = contactForm.querySelector('button[type="submit"]');
+
+                if (submitBtn) {
+                    submitBtn.innerHTML = submitBtn.innerHTML + '<div class="ms-2 spinner-border spinner-border-sm" role="status"><span class="visually-hidden">Loading...</span></div>';
+                }
+
                 const formData = new URLSearchParams(new FormData(contactForm)).toString();
 
                 axios.post(contactForm.getAttribute('action'), formData)
@@ -161,6 +183,9 @@ module.exports = {
 
                         alert.classList.remove('d-none');
                         alert.scrollIntoView({block: 'center'});
+                    })
+                    .then(() => {
+                        submitBtn.querySelector('.spinner-border').remove();
                     });
             });
         }

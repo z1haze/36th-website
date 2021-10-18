@@ -1,7 +1,18 @@
-const { body, validationResult } = require('express-validator');
+const express = require('express');
+const router = express.Router();
+
+const {body, validationResult} = require('express-validator');
 const nodeMailer = require('nodemailer');
 
-module.exports = [
+/**
+ * Render Page view
+ */
+router.get('/', (req, res) => res.render('contact'));
+
+/**
+ * Handle Form Submission
+ */
+router.post('/', [
     body('name').trim().exists(),
     body('email').isEmail(),
     body('message').trim().isLength({min: 10}),
@@ -36,4 +47,6 @@ module.exports = [
             return res.json({success: true});
         });
     }
-];
+]);
+
+module.exports = router;

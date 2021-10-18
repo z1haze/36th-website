@@ -1,6 +1,11 @@
+const express = require('express');
 const axios = require('axios');
+const router = express.Router();
 
-module.exports = async (req, res) => {
+/**
+ * Handle login form submission
+ */
+router.post('/', async (req, res) => {
     const code = req.body.code;
     const redirect_uri = req.body.redirect;
 
@@ -37,9 +42,9 @@ module.exports = async (req, res) => {
                 discord_user_id      : data.id,
                 discord_username     : data.username,
                 discord_discriminator: data.discriminator,
-                discord_avatar_hash  : data.avatar,
-                canApply             : await require('./check_can_apply')(data.id)
+                discord_avatar_hash  : data.avatar
             });
         });
+});
 
-};
+module.exports = router;

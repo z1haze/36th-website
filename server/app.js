@@ -30,7 +30,7 @@ app
             store: require('./session/store')
         })
     )
-    .use('/', require('./routes'))
+    .use('/', require('./routers'))
     .use(express.static(path.join(__dirname, '..', 'client/public')))
     .use(favicon(path.join(__dirname, '..', 'client/public', 'favicon.ico')))
     .engine('hbs', hbs({
