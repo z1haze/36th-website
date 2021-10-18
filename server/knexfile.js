@@ -14,10 +14,10 @@ const config = {
     },
     migrations: {
         tableName: 'migrations',
-        directory: './db/migrations'
+        directory: './database/migrations'
     },
     seeds: {
-        directory: './db/seeds'
+        directory: './database/seeds'
     }
 };
 
