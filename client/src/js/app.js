@@ -1,12 +1,7 @@
 require('regenerator-runtime/runtime');
 
-const bs = require('bootstrap');
 const {WOW} = require('wowjs');
 const Swiper = require('swiper/bundle').default;
-
-// popovers
-[].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-    .map((el) => new bs.Popover(el));
 
 // wow js stuff w/animate.css
 const wow = new WOW({
@@ -65,12 +60,7 @@ window.addEventListener('load', () => {
 // init form handling
 require('./util/forms').init();
 
-// const applicationVue = document.getElementById('application-vue');
-//
-// if (applicationVue) {
-//     require('./vue/application')();
-// }
-
+// image lazy loading
 require('./util/lazyload')();
 
 console.log('Loaded! 😀'); // eslint-disable-line no-console
