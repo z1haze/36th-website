@@ -85,7 +85,8 @@ module.exports = {
             // create the company entry
             results.companies[companyRoleName] = {
                 companyLeaders: [],
-                platoons      : {}
+                platoons      : {},
+                count         : 0
             };
 
             for (const {discord_role_name: platoonRoleName} of currentPlatoonRoles) {
@@ -149,6 +150,9 @@ module.exports = {
             if (member.companyRole.discord_role_name.toLowerCase().includes('item')) {
                 continue;
             }
+
+            // increment the member count of the company
+            results.companies[member.companyRole.discord_role_name].count++;
 
             const companyName = member.companyRole.discord_role_name.substr(0, member.companyRole.discord_role_name.indexOf(' '));
             const companyLeadershipRoleIds = process.env[`${companyName.toUpperCase()}_COMPANY_LEADERSHIP_ROLE_IDS`].split(',');
@@ -268,6 +272,12 @@ module.exports = {
                         delete results.companies[ckey].platoons[pkey];
                     }
                 }
+            }
+        }
+
+        for (const name in results.companies) {
+            if (results.companies[name].count === 0) {
+                delete results.companies[name];
             }
         }
 
