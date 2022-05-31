@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const path = require('path');
 const express = require('express');
-const hbs = require('express-handlebars');
+const {engine} = require('express-handlebars');
 const {v4: uuidv4} = require('uuid');
 const favicon = require('serve-favicon');
 
@@ -20,11 +20,9 @@ app
             secret           : process.env.COOKIE_SECRET,
             resave           : false,
             saveUninitialized: true,
-            genid            : function () {
-                return uuidv4();
-            },
-            name  : '36th.sid',
-            cookie: {
+            genid            : uuidv4,
+            name             : '36th.sid',
+            cookie           : {
                 maxAge: eval(process.env.SESSION_MAX_AGE)
             },
             store: require('./session/store')
@@ -33,7 +31,7 @@ app
     .use('/', require('./routers'))
     .use(express.static(path.join(__dirname, '..', 'client/public')))
     .use(favicon(path.join(__dirname, '..', 'client/public', 'favicon.ico')))
-    .engine('hbs', hbs({
+    .engine('hbs', engine({
         extname: 'hbs',
         helpers: require('./handlebars/helpers')
     }))
